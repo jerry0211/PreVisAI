@@ -20,9 +20,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 72% 8%, rgba(121, 167, 255, 0.12), transparent 28rem),
-    linear-gradient(135deg, #101216 0%, #151820 48%, #0f1115 100%);
+  background: linear-gradient(135deg, #101216 0%, #151820 48%, #0f1115 100%);
   color: var(--text);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -33,6 +31,11 @@ button {
   color: inherit;
   font: inherit;
   cursor: pointer;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 
 .app-shell {
@@ -102,7 +105,7 @@ h3 {
 
 .workspace {
   display: grid;
-  grid-template-columns: minmax(290px, 0.78fr) minmax(560px, 1.5fr);
+  grid-template-columns: minmax(360px, 0.88fr) minmax(560px, 1.42fr);
   gap: 18px;
 }
 
@@ -140,7 +143,7 @@ h3 {
 
 .icon-button,
 .download-button,
-#loadStoryboard,
+#analyzeButton,
 .primary {
   min-height: 38px;
   border-radius: 7px;
@@ -162,22 +165,145 @@ h3 {
   color: var(--ink);
 }
 
-textarea {
-  width: 100%;
-  min-height: 340px;
-  flex: 1;
-  resize: none;
-  border: 1px solid var(--line);
+.upload-drop {
+  display: grid;
+  min-height: 122px;
+  place-items: center;
+  gap: 5px;
+  border: 1px dashed #4c5564;
   border-radius: 8px;
-  outline: 0;
   background: #111419;
-  color: var(--text);
-  padding: 14px;
-  font: 0.92rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: 18px;
+  text-align: center;
 }
 
-textarea:focus {
-  border-color: var(--blue);
+.upload-drop input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.upload-drop strong {
+  font-size: 0.98rem;
+}
+
+.upload-drop small {
+  max-width: 34ch;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.upload-icon {
+  display: grid;
+  width: 44px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #20242c;
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.preview-stage {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1.45;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #0d1014;
+}
+
+.preview-stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #e9e3d7;
+}
+
+.vision-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.panel-box,
+.vector-line,
+.subject-mask {
+  position: absolute;
+  display: block;
+}
+
+.panel-box {
+  border: 2px solid var(--green);
+  box-shadow: 0 0 0 999px rgba(11, 13, 16, 0.02);
+}
+
+.panel-a {
+  left: 4.5%;
+  top: 8%;
+  width: 27%;
+  height: 36%;
+}
+
+.panel-b {
+  left: 36.5%;
+  top: 8%;
+  width: 27%;
+  height: 36%;
+}
+
+.panel-c {
+  left: 68%;
+  top: 8%;
+  width: 27%;
+  height: 36%;
+}
+
+.subject-mask {
+  border: 2px solid var(--blue);
+  border-radius: 50% 50% 10% 10%;
+  background: rgba(121, 167, 255, 0.16);
+}
+
+.mask-a {
+  left: 15%;
+  top: 16%;
+  width: 8%;
+  height: 22%;
+}
+
+.mask-b {
+  left: 47%;
+  top: 15%;
+  width: 12%;
+  height: 23%;
+}
+
+.vector-line {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--amber);
+  transform-origin: left center;
+}
+
+.line-a {
+  left: 51%;
+  top: 18%;
+  width: 11%;
+  transform: rotate(-24deg);
+}
+
+.line-b {
+  left: 27%;
+  top: 72%;
+  width: 48%;
+  transform: rotate(4deg);
 }
 
 .metadata-grid {
@@ -248,43 +374,71 @@ textarea:focus {
 
 .frame-one {
   background:
-    linear-gradient(160deg, rgba(105, 211, 145, 0.14), transparent 44%),
-    repeating-linear-gradient(90deg, #171d24 0 12px, #11161c 12px 24px);
+    linear-gradient(90deg, transparent 0 32%, rgba(105, 211, 145, 0.18) 32% 34%, transparent 34% 66%, rgba(105, 211, 145, 0.18) 66% 68%, transparent 68%),
+    linear-gradient(#252a32, #111419);
 }
 
 .frame-one::before {
-  inset: 24px 36px 30px;
-  border: 2px solid rgba(242, 185, 80, 0.68);
-  transform: perspective(180px) rotateX(28deg);
+  inset: 28px 26px;
+  border: 2px solid var(--green);
+}
+
+.frame-one::after {
+  inset: 50px 46px;
+  border: 2px solid var(--green);
 }
 
 .frame-two {
   background:
-    linear-gradient(90deg, transparent 0 32%, rgba(121, 167, 255, 0.2) 32% 42%, transparent 42%),
+    radial-gradient(circle at 46% 48%, rgba(121, 167, 255, 0.32), transparent 16%),
+    radial-gradient(circle at 68% 42%, rgba(239, 120, 111, 0.26), transparent 13%),
     linear-gradient(#252a32, #111419);
 }
 
 .frame-two::before {
-  left: 44%;
-  bottom: 25px;
-  width: 28px;
-  height: 72px;
-  border-radius: 20px 20px 6px 6px;
-  background: var(--red);
+  left: 24%;
+  bottom: 26px;
+  width: 52px;
+  height: 76px;
+  border: 2px solid var(--blue);
+  border-radius: 28px 28px 8px 8px;
+  background: rgba(121, 167, 255, 0.15);
+}
+
+.frame-two::after {
+  right: 22%;
+  top: 34px;
+  width: 66px;
+  height: 66px;
+  border: 2px solid var(--red);
+  border-radius: 50%;
+  background: rgba(239, 120, 111, 0.14);
 }
 
 .frame-three {
   background:
-    radial-gradient(circle at 50% 52%, rgba(105, 211, 145, 0.28), transparent 22%),
+    linear-gradient(90deg, rgba(242, 185, 80, 0.3), rgba(105, 211, 145, 0.16), transparent),
     linear-gradient(120deg, #111419, #242832);
 }
 
 .frame-three::before {
-  left: 18%;
-  right: 18%;
+  left: 16%;
+  right: 16%;
   top: 48%;
-  height: 2px;
-  background: var(--green);
+  height: 3px;
+  border-radius: 999px;
+  background: var(--amber);
+  transform: rotate(-10deg);
+}
+
+.frame-three::after {
+  right: 18%;
+  top: 38%;
+  width: 18px;
+  height: 18px;
+  border-top: 3px solid var(--amber);
+  border-right: 3px solid var(--amber);
+  transform: rotate(35deg);
 }
 
 .frame span {
@@ -299,9 +453,36 @@ textarea:focus {
   padding: 18px;
 }
 
-.input-card textarea {
-  min-height: 176px;
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
   margin-top: 16px;
+}
+
+.mission-grid article {
+  min-height: 120px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #111419;
+  padding: 14px;
+}
+
+.mission-grid strong {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--panel-2);
+  color: var(--green);
+}
+
+.mission-grid span {
+  display: block;
+  margin-top: 16px;
+  color: #d7dde5;
+  line-height: 1.45;
 }
 
 .action-row {
@@ -363,7 +544,8 @@ pre {
 
 @media (max-width: 980px) {
   .workspace,
-  .output-grid {
+  .output-grid,
+  .mission-grid {
     grid-template-columns: 1fr;
   }
 
