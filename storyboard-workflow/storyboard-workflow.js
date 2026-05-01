@@ -1,19 +1,19 @@
 const outputFiles = {
   vectors: {
-    path: "./outputs/scene_vectors.json",
+    path: "../outputs/scene_vectors.json",
     filename: "scene_vectors.json",
     type: "application/json"
   },
   prompt: {
-    path: "./outputs/video_prompt.txt",
+    path: "../outputs/video_prompt.txt",
     filename: "video_prompt.txt",
     type: "text/plain"
   }
 };
 
 const inputFiles = {
-  scenario: "./inputs/scenario.txt",
-  match: "./inputs/scenario-match.json"
+  scenario: "../inputs/scenario.txt",
+  match: "../inputs/scenario-match.json"
 };
 
 const storyboardPreview = document.querySelector("#storyboardPreview");
@@ -28,6 +28,10 @@ const vectorOutput = document.querySelector("#vectorOutput");
 const promptOutput = document.querySelector("#promptOutput");
 const progressBar = document.querySelector("#progressBar");
 const statusPill = document.querySelector("#statusPill");
+const newProjectButton = document.querySelector("#newProjectButton");
+const projectListItems = document.querySelector("#projectListItems");
+
+const defaultProjects = ["Orbital Witness", "Glass Desert", "Signal Room"];
 
 let loadedOutputs = {
   vectors: "",
@@ -36,6 +40,28 @@ let loadedOutputs = {
 
 let scenarioSource = "";
 let scenarioMatch = null;
+
+function getProjects() {
+  const savedProjects = JSON.parse(localStorage.getItem("projects") || "null");
+  return savedProjects || defaultProjects;
+}
+
+function renderProjects() {
+  projectListItems.innerHTML = "";
+
+  getProjects().forEach((name) => {
+    const button = document.createElement("button");
+    button.className = "project-item";
+    button.type = "button";
+    button.dataset.project = name;
+    button.textContent = name;
+    button.addEventListener("click", () => {
+      sessionStorage.setItem("projectName", name);
+      setStatus(`${name} selected`);
+    });
+    projectListItems.append(button);
+  });
+}
 
 function setStatus(text) {
   statusPill.lastChild.textContent = ` ${text}`;
@@ -74,7 +100,7 @@ async function loadScenario() {
     throw new Error(`Could not load ${inputFiles.match}`);
   }
 
-  scenarioSource = await scenarioResponse.text();
+  scenarioSource = sessionStorage.getItem("projectScenario") || await scenarioResponse.text();
   scenarioMatch = await matchResponse.json();
   scenarioText.textContent = scenarioSource;
 }
@@ -215,3 +241,9 @@ const scenarioReady = loadScenario().catch((error) => {
   setStatus("Scenario file could not be loaded");
   console.error(error);
 });
+
+newProjectButton.addEventListener("click", () => {
+  window.location.href = "../project-setup/index.html";
+});
+
+renderProjects();

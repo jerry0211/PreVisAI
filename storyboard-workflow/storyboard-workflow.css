@@ -8,9 +8,59 @@ body {
 }
 
 main {
-  width: min(960px, 100%);
-  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.workflow-page {
+  padding: 88px 24px 24px 284px;
+}
+
+.project-list {
+  position: fixed;
+  inset: 64px auto 0 0;
+  display: grid;
+  width: 260px;
   padding: 24px;
+  align-content: start;
+  gap: 8px;
+  border-right: 1px solid currentColor;
+  overflow: auto;
+}
+
+.top-bar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1;
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 24px;
+  border-bottom: 1px solid currentColor;
+  background: Canvas;
+}
+
+.brand,
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-placeholder {
+  width: 28px;
+  height: 28px;
+  border: 1px solid currentColor;
+}
+
+.profile-placeholder {
+  min-width: 44px;
+}
+
+.project-item {
+  width: 100%;
+  text-align: left;
 }
 
 header,
@@ -32,6 +82,26 @@ button {
 
 button:disabled {
   cursor: wait;
+}
+
+dialog {
+  width: min(560px, calc(100% - 32px));
+}
+
+dialog header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+dialog form {
+  display: grid;
+  gap: 12px;
+}
+
+dialog pre {
+  max-height: 220px;
 }
 
 #statusPill span {
@@ -169,6 +239,22 @@ pre {
 }
 
 @media (max-width: 720px) {
+  .workflow-page {
+    padding: 244px 16px 16px;
+  }
+
+  .project-list {
+    inset: 64px 0 auto 0;
+    width: 100%;
+    max-height: 164px;
+    border-right: 0;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .top-bar {
+    inset: 0 0 auto 0;
+  }
+
   .source-grid,
   .output-grid {
     grid-template-columns: 1fr;

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>previs-AI Projects</title>
+    <link rel="stylesheet" href="./project-setup.css" />
+  </head>
+  <body>
+    <header class="top-bar">
+      <a class="brand" href="./index.html" aria-label="previs-AI home">
+        <span class="logo-placeholder" aria-hidden="true"></span>
+        <span>previs-AI</span>
+      </a>
+      <div class="top-actions">
+        <button type="button">Help</button>
+        <button class="profile-placeholder" type="button" aria-label="User profile">User</button>
+      </div>
+    </header>
+
+    <main class="project-page">
+      <aside class="project-list" aria-label="projects">
+        <h1>previs-AI</h1>
+        <button class="project-item" id="newProjectButton">New Project</button>
+        <div id="projectListItems"></div>
+      </aside>
+
+      <section class="project-placeholder" aria-label="project setup">
+        <h2>Create or select a project</h2>
+        <p>Upload the overarching scenario before moving into storyboard matching.</p>
+      </section>
+    </main>
+
+    <dialog id="scenarioDialog">
+      <form method="dialog">
+        <header>
+          <h2 id="dialogTitle">New Project</h2>
+          <button value="cancel" aria-label="Close">Close</button>
+        </header>
+
+        <label for="projectName">Project name</label>
+        <input id="projectName" name="projectName" type="text" />
+
+        <label for="scenarioFile">Scenario file</label>
+        <input id="scenarioFile" name="scenarioFile" type="file" accept=".txt,text/plain" />
+
+        <pre id="scenarioPreview">Upload a .txt scenario file.</pre>
+
+        <div class="action-row">
+          <button id="continueButton" value="default" disabled>Continue to storyboard page</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="./project-setup.js"></script>
+  </body>
+</html>
