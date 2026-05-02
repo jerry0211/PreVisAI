@@ -1,0 +1,318 @@
+:root {
+  --bg: #05060a;
+  --surface: rgba(255, 255, 255, 0.025);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.18);
+  --text: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.62);
+  --text-dim: rgba(255, 255, 255, 0.38);
+  --text-faint: rgba(255, 255, 255, 0.22);
+  --accent: #4d7dff;
+  --accent-glow: rgba(77, 125, 255, 0.45);
+  --purple: #8b5cff;
+  --purple-glow: rgba(139, 92, 255, 0.4);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -0.01em;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 520px at 78% 18%, rgba(77, 125, 255, 0.18), transparent 70%),
+    radial-gradient(700px 480px at 12% 70%, rgba(139, 92, 255, 0.14), transparent 70%),
+    radial-gradient(1200px 800px at 50% 110%, rgba(77, 125, 255, 0.08), transparent 70%);
+}
+
+main,
+header {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- top bar ---------- */
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 40px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(5, 6, 10, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.deck-tag {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.brand-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 12px;
+  text-transform: none;
+}
+
+.brand-mini .brand-mark {
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 0 18px rgba(77, 125, 255, 0.4));
+}
+
+.tag-sep {
+  color: var(--text-faint);
+}
+
+.deck-page {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  color: var(--text-dim);
+}
+
+/* ---------- page ---------- */
+
+.page {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 64px 24px;
+}
+
+/* ---------- welcome card ---------- */
+
+.welcome-card {
+  position: relative;
+  width: min(520px, 100%);
+  display: grid;
+  gap: 24px;
+  padding: 40px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: linear-gradient(
+    180deg,
+    rgba(20, 22, 36, 0.85),
+    rgba(10, 12, 22, 0.92)
+  );
+  box-shadow: 0 60px 120px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  overflow: hidden;
+  animation: cardIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.welcome-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 255, 0.5),
+    transparent 45%,
+    transparent 55%,
+    rgba(77, 125, 255, 0.4)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--purple);
+  text-shadow: 0 0 18px var(--purple-glow);
+}
+
+.welcome-head {
+  display: grid;
+  gap: 8px;
+}
+
+.welcome-head h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.welcome-head p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* ---------- orb ---------- */
+
+.welcome-orb {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 4px;
+}
+
+.orb-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(77, 125, 255, 0),
+    rgba(77, 125, 255, 0.6),
+    rgba(139, 92, 255, 0.7),
+    rgba(77, 125, 255, 0)
+  );
+  filter: blur(8px);
+  animation: orbSpin 6s linear infinite;
+}
+
+.orb-core {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, var(--accent) 50%, var(--purple));
+  box-shadow: 0 0 40px var(--accent-glow), inset 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+@keyframes orbSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- stats ---------- */
+
+.welcome-stats {
+  list-style: none;
+  margin: 0;
+  padding: 16px 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.welcome-stats li {
+  display: grid;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* ---------- redirect track ---------- */
+
+.redirect-track {
+  position: relative;
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.redirect-fill {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--purple), var(--accent));
+  box-shadow: 0 0 12px var(--accent-glow);
+  animation: redirectFill 2000ms linear forwards;
+}
+
+@keyframes redirectFill {
+  to {
+    width: 100%;
+  }
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 560px) {
+  .top-bar {
+    padding: 14px 20px;
+  }
+
+  .tag-text,
+  .deck-page {
+    display: none;
+  }
+
+  .page {
+    padding: 32px 16px;
+  }
+
+  .welcome-card {
+    padding: 28px;
+  }
+
+  .welcome-stats {
+    grid-template-columns: 1fr;
+  }
+}

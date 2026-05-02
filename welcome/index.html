@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Welcome back</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    />
+    <link rel="stylesheet" href="./welcome.css" />
+  </head>
+  <body>
+    <div class="bg-glow" aria-hidden="true"></div>
+
+    <header class="top-bar">
+      <div class="deck-tag">
+        <a class="brand-mini" href="../login/index.html" aria-label="PreVisAI home">
+          <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="2" y="32" width="18" height="4" rx="2" fill="currentColor" />
+            <rect x="2" y="42" width="18" height="4" rx="2" fill="currentColor" />
+            <path
+              d="M22 50 C22 32, 34 22, 56 12 C50 30, 42 44, 28 56 Z"
+              fill="currentColor"
+            />
+            <circle cx="34" cy="36" r="2.4" fill="#05060a" />
+            <circle cx="42" cy="30" r="2.4" fill="#05060a" />
+          </svg>
+          <span>PreVisAI</span>
+        </a>
+        <span class="tag-sep">/</span>
+        <span class="tag-text">AI PRE-PRODUCTION SUITE &middot; SEED PITCH &middot; 2026</span>
+      </div>
+      <div class="deck-page">00.5 / 09</div>
+    </header>
+
+    <main class="page">
+      <section class="welcome-card" aria-label="signed in">
+        <div class="welcome-orb" aria-hidden="true">
+          <span class="orb-ring"></span>
+          <span class="orb-core"></span>
+        </div>
+
+        <div class="welcome-head">
+          <span class="eyebrow">Signed in</span>
+          <h1>Welcome back, <span id="userGreeting">filmmaker</span>.</h1>
+          <p>
+            Your project library is ready. Taking you to the project setup&hellip;
+          </p>
+        </div>
+
+        <ul class="welcome-stats">
+          <li>
+            <span class="stat-label">Projects</span>
+            <span class="stat-value" id="statProjects">3</span>
+          </li>
+          <li>
+            <span class="stat-label">Last activity</span>
+            <span class="stat-value">2h ago</span>
+          </li>
+          <li>
+            <span class="stat-label">Plan</span>
+            <span class="stat-value">Studio</span>
+          </li>
+        </ul>
+
+        <div class="redirect-track" aria-hidden="true">
+          <span class="redirect-fill"></span>
+        </div>
+      </section>
+    </main>
+
+    <script src="./welcome.js"></script>
+  </body>
+</html>
