@@ -3,7 +3,7 @@ const statProjects = document.querySelector("#statProjects");
 
 const PROJECT_SETUP_URL = "../project-setup/index.html";
 const LOGIN_URL = "../login/index.html";
-const LINGER_MS = 2000;
+const LINGER_MS = 800;
 
 const defaultProjects = ["Orbital Witness", "Glass Desert", "Signal Room"];
 

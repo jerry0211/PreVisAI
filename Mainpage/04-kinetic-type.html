@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Cut. Print. Imagine.</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;700;900&family=Inter:wght@400;500;600&display=swap" />
+    <style>
+      :root {
+        --bg: #05060a;
+        --ink: #ffffff;
+        --red: #4d7dff;
+        --blu: #8b5cff;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; }
+      body {
+        background: var(--bg);
+        color: var(--ink);
+        font-family: 'Archivo', sans-serif;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      header {
+        position: sticky; top: 0; z-index: 20;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 18px 32px;
+        background: var(--bg);
+        border-bottom: 3px solid var(--ink);
+      }
+      .brand {
+        display: inline-flex; align-items: center; gap: 10px;
+        font-family: 'Anton', sans-serif;
+        font-size: 22px;
+        letter-spacing: 1px;
+      }
+      .brand img { width: 28px; height: 28px; }
+      .brand b { background: var(--ink); color: var(--bg); padding: 0 6px; }
+      header nav { display: inline-flex; gap: 6px; }
+      header nav a {
+        color: var(--ink); text-decoration: none;
+        font-weight: 700; font-size: 13px;
+        letter-spacing: 1px; text-transform: uppercase;
+        padding: 8px 14px;
+        border: 2px solid var(--ink);
+        background: var(--bg);
+        transition: transform .15s, background .15s, color .15s;
+      }
+      header nav a:hover { background: var(--ink); color: var(--bg); transform: rotate(-2deg); }
+      header nav a.active { background: var(--ink); color: var(--bg); }
+
+      /* ---- ticker ---- */
+      .ticker {
+        background: var(--ink); color: var(--bg);
+        overflow: hidden;
+        border-bottom: 3px solid var(--ink);
+        position: sticky; top: 76px; z-index: 19;
+      }
+      .ticker-track {
+        display: inline-flex; white-space: nowrap;
+        font-family: 'Anton', sans-serif;
+        font-size: 24px; letter-spacing: 2px;
+        padding: 10px 0;
+        animation: tick 32s linear infinite;
+      }
+      .ticker-track span { padding: 0 22px; display: inline-flex; align-items: center; gap: 22px; }
+      .ticker-track span::after { content: '◆'; color: var(--red); }
+      .ticker-track .y { color: var(--bg); }
+      .ticker-track .r { color: var(--red); }
+      @keyframes tick {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+
+      /* ---- hero ---- */
+      .hero {
+        position: relative;
+        padding: 60px 32px 30px;
+        border-bottom: 3px solid var(--ink);
+      }
+      .kicker {
+        font-family: 'Archivo', sans-serif;
+        font-weight: 900;
+        font-size: 13px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        margin-bottom: 18px;
+        display: inline-flex; align-items: center; gap: 12px;
+      }
+      .kicker::before {
+        content: ''; width: 40px; height: 3px; background: var(--ink);
+      }
+
+      .mega {
+        font-family: 'Anton', sans-serif;
+        font-size: clamp(80px, 16vw, 240px);
+        line-height: 0.86;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+      }
+      .mega .l1 { display: block; }
+      .mega .l2 { display: block; padding-left: 12vw; }
+      .mega .l3 { display: block; }
+
+      .swap {
+        position: relative;
+        display: inline-block;
+        background: var(--ink);
+        color: var(--bg);
+        padding: 0 14px;
+        overflow: hidden;
+        vertical-align: top;
+        min-width: 6.5ch;
+      }
+      .swap-list {
+        display: flex; flex-direction: column;
+        animation: swap 9s steps(1) infinite;
+      }
+      .swap-list span { display: block; }
+      @keyframes swap {
+        0%   { transform: translateY(0); }
+        25%  { transform: translateY(-100%); }
+        50%  { transform: translateY(-200%); }
+        75%  { transform: translateY(-300%); }
+        100% { transform: translateY(0); }
+      }
+
+      .accent-r { color: var(--red); font-style: italic; }
+      .accent-b { color: var(--blu); }
+
+      .hero-foot {
+        margin-top: 40px;
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 40px;
+        align-items: end;
+      }
+      .hero-foot p {
+        max-width: 580px;
+        font-size: 18px; font-weight: 500;
+        line-height: 1.45;
+      }
+      .hero-foot .arrow {
+        font-family: 'Anton', sans-serif;
+        font-size: 64px;
+        text-align: right;
+        line-height: 1;
+        animation: bob 1.6s ease-in-out infinite;
+      }
+      @keyframes bob {
+        0%,100% { transform: translateY(0); }
+        50%     { transform: translateY(8px); }
+      }
+
+      /* ---- sticker decorations ---- */
+      .sticker {
+        position: absolute;
+        font-family: 'Anton', sans-serif;
+        background: var(--bg);
+        border: 3px solid var(--ink);
+        padding: 6px 14px;
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        animation: wobble 4s ease-in-out infinite;
+      }
+      .sticker.a { top: 88px; right: 60px; transform: rotate(8deg); background: var(--red); color: var(--bg); border-color: var(--ink); }
+      .sticker.b { top: 220px; right: 32px; transform: rotate(-6deg); background: var(--blu); color: var(--bg); }
+      .sticker.c { bottom: 60px; right: 80px; transform: rotate(4deg); }
+      @keyframes wobble {
+        0%,100% { translate: 0 0; }
+        50%     { translate: 0 -6px; }
+      }
+
+      /* ---- auth section ---- */
+      .auth {
+        padding: 60px 32px 80px;
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .auth-headline {
+        font-family: 'Anton', sans-serif;
+        font-size: clamp(48px, 8vw, 100px);
+        line-height: 0.9;
+        text-transform: uppercase;
+      }
+      .auth-headline em {
+        font-style: italic;
+        background: var(--red);
+        color: var(--bg);
+        padding: 0 10px;
+      }
+      .auth-sub {
+        margin-top: 22px;
+        font-size: 17px;
+        max-width: 460px;
+        line-height: 1.5;
+      }
+
+      .auth-box {
+        background: var(--ink);
+        color: var(--bg);
+        border: 3px solid var(--ink);
+        padding: 30px;
+        position: relative;
+        box-shadow: 12px 12px 0 var(--red);
+        transition: transform .2s, box-shadow .2s;
+      }
+      .auth-box:hover {
+        transform: translate(-3px, -3px);
+        box-shadow: 18px 18px 0 var(--red);
+      }
+      .auth-box h2 {
+        font-family: 'Anton', sans-serif;
+        font-size: 36px; letter-spacing: 1px;
+        margin-bottom: 18px;
+        text-transform: uppercase;
+      }
+
+      .toggle {
+        display: inline-flex;
+        border: 2px solid var(--bg);
+        margin-bottom: 22px;
+      }
+      .toggle button {
+        all: unset;
+        padding: 10px 20px;
+        font-weight: 900;
+        font-size: 12px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: var(--bg);
+      }
+      .toggle button.on {
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      .field {
+        display: block;
+        margin-bottom: 14px;
+      }
+      .field input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid var(--bg);
+        padding: 12px 0;
+        color: var(--bg);
+        font-family: 'Archivo', sans-serif;
+        font-weight: 600;
+        font-size: 16px;
+        outline: none;
+      }
+      .field input::placeholder { color: rgba(0,0,0,0.4); text-transform: uppercase; letter-spacing: 1px; }
+      .field input:focus { border-color: var(--red); }
+
+      .submit {
+        margin-top: 18px;
+        width: 100%;
+        background: var(--bg);
+        color: var(--ink);
+        border: none;
+        padding: 18px;
+        font-family: 'Anton', sans-serif;
+        font-size: 24px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: transform .15s;
+      }
+      .submit:hover { transform: scale(1.02); }
+      .submit::before {
+        content: ''; position: absolute; inset: 0;
+        background: var(--red);
+        transform: translateX(-101%);
+        transition: transform .35s cubic-bezier(.7,0,.2,1);
+      }
+      .submit:hover::before { transform: translateX(0); }
+      .submit span {
+        position: relative; z-index: 2;
+        transition: color .35s;
+      }
+      .submit:hover span { color: var(--bg); }
+
+      .foot-line {
+        margin-top: 16px;
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        text-align: center;
+      }
+      .foot-line a { color: var(--red); text-decoration: none; }
+
+      footer {
+        border-top: 3px solid var(--ink);
+        padding: 18px 32px;
+        display: flex; justify-content: space-between;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      @media (max-width: 880px) {
+        .auth { grid-template-columns: 1fr; }
+        .hero-foot { grid-template-columns: 1fr; }
+        .mega .l2 { padding-left: 0; }
+        .sticker.a, .sticker.b, .sticker.c { display: none; }
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <span class="brand"><img src="../assets/favicon.ico" alt="" /> PRE<b>VIS</b>AI</span>
+      <nav>
+        <a href="#" class="active">HOME</a>
+        <a href="#">REELS</a>
+        <a href="#">PRICING</a>
+        <a href="#">DOCS</a>
+      </nav>
+    </header>
+
+    <div class="ticker">
+      <div class="ticker-track">
+        <span>NEW · MULTI-MODEL DIRECTING</span>
+        <span class="r">SORA</span>
+        <span>★</span>
+        <span class="r">RUNWAY</span>
+        <span>★</span>
+        <span class="r">HIGGSFIELD</span>
+        <span>★</span>
+        <span class="r">KLING</span>
+        <span>NEW · MULTI-MODEL DIRECTING</span>
+        <span class="r">SORA</span>
+        <span>★</span>
+        <span class="r">RUNWAY</span>
+        <span>★</span>
+        <span class="r">HIGGSFIELD</span>
+        <span>★</span>
+        <span class="r">KLING</span>
+      </div>
+    </div>
+
+    <section class="hero">
+      <span class="kicker">No. 0451 / Pre-Vis Studio</span>
+      <h1 class="mega">
+        <span class="l1">CUT.</span>
+        <span class="l2">PRINT.</span>
+        <span class="l3"><span class="accent-r">IMAGINE</span> <span class="swap"><span class="swap-list">
+          <span>FASTER.</span>
+          <span>WIDER.</span>
+          <span>WEIRDER.</span>
+          <span>FIRST.</span>
+        </span></span></span>
+      </h1>
+
+      <span class="sticker a">★ Now Casting</span>
+      <span class="sticker b">v0.9</span>
+      <span class="sticker c">↓ Sign in below</span>
+
+      <div class="hero-foot">
+        <p>
+          PreVisAI is the loud, opinionated pre-visualization studio for filmmakers
+          who would rather direct AI than fight it. Storyboard, shot-list, and
+          previsualize across <b>Sora</b>, <b>Runway</b>, <b>Higgsfield</b>, and <b>Kling</b> — all from one slate.
+        </p>
+        <span class="arrow">↘</span>
+      </div>
+    </section>
+
+    <section class="auth">
+      <div>
+        <h2 class="auth-headline">START<br/>YOUR <em>REEL</em><br/>IN 30s.</h2>
+        <p class="auth-sub">
+          Sign in to your studio or claim a fresh director's pass.
+          No credit card. No script supervisor.
+        </p>
+      </div>
+
+      <div class="auth-box">
+        <h2>Studio Pass</h2>
+        <div class="toggle">
+          <button class="on" data-mode="signin">SIGN IN</button>
+          <button data-mode="signup">CREATE</button>
+        </div>
+        <form onsubmit="return false;">
+          <label class="field" id="nameField" hidden>
+            <input type="text" placeholder="DIRECTOR'S NAME" />
+          </label>
+          <label class="field">
+            <input type="email" placeholder="EMAIL ADDRESS" />
+          </label>
+          <label class="field">
+            <input type="password" placeholder="PASSWORD" />
+          </label>
+          <button class="submit" id="cta"><span>ACTION!</span></button>
+          <p class="foot-line">SSL · OR <a href="../login/index.html">CLASSIC SIGN-IN</a></p>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <span>© PRE-VIS-AI PICTURES — 2026</span>
+      <span>MADE FOR FILMMAKERS, BY FILMMAKERS</span>
+    </footer>
+
+    <script>
+      const tabs = document.querySelectorAll('.toggle button');
+      const nameField = document.getElementById('nameField');
+      const cta = document.getElementById('cta').querySelector('span');
+      tabs.forEach(b => b.addEventListener('click', () => {
+        tabs.forEach(x => x.classList.remove('on'));
+        b.classList.add('on');
+        const signup = b.dataset.mode === 'signup';
+        nameField.hidden = !signup;
+        cta.textContent = signup ? 'ROLL IT!' : 'ACTION!';
+      }));
+      document.getElementById('cta').addEventListener('click', () => {
+        setTimeout(() => location.href = '../login/index.html', 280);
+      });
+
+
+    </script>
+  </body>
+</html>

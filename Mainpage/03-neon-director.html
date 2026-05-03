@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Director's Booth</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" />
+    <style>
+      :root {
+        --bg: #05060a;
+        --grid-c: rgba(77,125,255,0.18);
+        --neon-1: #4d7dff;
+        --neon-2: #8b5cff;
+        --neon-3: #a78bfa;
+        --txt: #ffffff;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; }
+      body {
+        background: var(--bg);
+        color: var(--txt);
+        font-family: 'JetBrains Mono', monospace;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* ---- floor grid ---- */
+      .floor {
+        position: fixed;
+        inset: 50% -20% -50% -20%;
+        background:
+          linear-gradient(var(--grid-c) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-c) 1px, transparent 1px);
+        background-size: 80px 80px;
+        transform: perspective(420px) rotateX(60deg);
+        animation: scroll-floor 1.2s linear infinite;
+        z-index: 1;
+        opacity: 0.7;
+      }
+      @keyframes scroll-floor {
+        from { background-position: 0 0; }
+        to   { background-position: 0 80px; }
+      }
+      .sky {
+        position: fixed;
+        top: 0; left: 0; right: 0; height: 50%;
+        background:
+          radial-gradient(ellipse at 50% 100%, rgba(139,92,255,0.4), transparent 50%),
+          linear-gradient(180deg, #05060a, #0a0c14);
+        z-index: 1;
+      }
+      .sun {
+        position: fixed;
+        left: 50%; top: 32%;
+        transform: translate(-50%, -50%);
+        width: 380px; height: 380px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #a78bfa, #8b5cff 60%, #1a1530);
+        z-index: 2;
+        box-shadow: 0 0 80px rgba(139,92,255,0.6),
+                    0 0 160px rgba(139,92,255,0.4);
+        mask: linear-gradient(180deg,
+          #000 0, #000 55%,
+          transparent 56%, #000 60%, #000 64%,
+          transparent 65%, #000 70%, #000 73%,
+          transparent 74%, #000 80%, #000 83%,
+          transparent 84%, #000 90%, #000 93%, transparent 94%);
+        animation: pulse 4s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,100% { transform: translate(-50%, -50%) scale(1); }
+        50%     { transform: translate(-50%, -50%) scale(1.04); }
+      }
+
+      /* ---- scanlines ---- */
+      .scan {
+        position: fixed; inset: 0;
+        background: repeating-linear-gradient(0deg,
+          rgba(0,0,0,0) 0 2px,
+          rgba(0,0,0,0.18) 2px 4px);
+        pointer-events: none;
+        z-index: 30;
+        mix-blend-mode: multiply;
+      }
+      .scan::after {
+        content: '';
+        position: absolute; left: 0; right: 0; height: 30%;
+        top: -30%;
+        background: linear-gradient(180deg, transparent, rgba(77,125,255,0.05), transparent);
+        animation: roll 7s linear infinite;
+      }
+      @keyframes roll {
+        from { top: -30%; } to { top: 130%; }
+      }
+
+      /* ---- top hud ---- */
+      .hud {
+        position: fixed; top: 0; left: 0; right: 0;
+        padding: 16px 28px;
+        display: flex; justify-content: space-between; align-items: center;
+        z-index: 10;
+        font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+        color: var(--neon-1);
+      }
+      .hud .left, .hud .right { display: inline-flex; gap: 16px; align-items: center; }
+      .hud .dot {
+        width: 8px; height: 8px; background: var(--neon-2); border-radius: 50%;
+        box-shadow: 0 0 12px var(--neon-2);
+        animation: blink 1.4s infinite;
+      }
+      @keyframes blink {
+        0%,49% { opacity: 1; }
+        50%,100% { opacity: 0.2; }
+      }
+
+      /* ---- main ---- */
+      main {
+        position: relative; z-index: 5;
+        height: 100vh;
+        display: flex; align-items: center; justify-content: center;
+        padding: 0 24px;
+      }
+
+      .booth {
+        width: min(1080px, 100%);
+        display: grid;
+        grid-template-columns: 1fr 460px;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .left-panel { padding-top: 60px; }
+
+      .label {
+        display: inline-block;
+        font-size: 11px;
+        letter-spacing: 5px;
+        color: var(--neon-1);
+        border: 1px solid var(--neon-1);
+        padding: 6px 12px;
+        margin-bottom: 22px;
+        background: rgba(77,125,255,0.06);
+        box-shadow: 0 0 12px rgba(77,125,255,0.3) inset;
+      }
+
+      .glitch {
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 900;
+        font-size: clamp(48px, 7vw, 92px);
+        line-height: 1;
+        letter-spacing: -0.02em;
+        position: relative;
+        color: var(--txt);
+        text-shadow: 0 0 24px rgba(77,125,255,0.5);
+      }
+      .glitch span { display: block; }
+      .glitch::before, .glitch::after {
+        content: attr(data-text);
+        position: absolute; left: 0; top: 0;
+        width: 100%;
+        overflow: hidden;
+      }
+      .glitch::before {
+        color: var(--neon-2);
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        animation: glitch-a 4s infinite linear alternate;
+      }
+      .glitch::after {
+        color: var(--neon-1);
+        clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+        animation: glitch-b 4s infinite linear alternate;
+      }
+      @keyframes glitch-a {
+        0%,80% { transform: translate(0,0); }
+        82% { transform: translate(-3px,1px); }
+        84% { transform: translate(2px,-1px); }
+        86%,100% { transform: translate(0,0); }
+      }
+      @keyframes glitch-b {
+        0%,90% { transform: translate(0,0); }
+        92% { transform: translate(2px,1px); }
+        94% { transform: translate(-1px,-2px); }
+        96%,100% { transform: translate(0,0); }
+      }
+
+      .typer {
+        margin-top: 24px;
+        font-size: 14px;
+        color: rgba(255,255,255,0.85);
+        max-width: 480px;
+        min-height: 4em;
+        line-height: 1.65;
+      }
+      .caret {
+        display: inline-block; width: 8px; height: 1em;
+        background: var(--neon-1); vertical-align: text-bottom;
+        animation: caret 1s steps(2) infinite;
+      }
+      @keyframes caret { 50% { opacity: 0; } }
+
+      .chips {
+        margin-top: 24px;
+        display: flex; flex-wrap: wrap; gap: 8px;
+      }
+      .chip {
+        font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+        padding: 6px 12px;
+        border: 1px solid rgba(77,125,255,0.4);
+        color: var(--neon-1);
+        background: rgba(77,125,255,0.04);
+        border-radius: 2px;
+      }
+      .chip.alt { color: var(--neon-2); border-color: rgba(139,92,255,0.4); }
+      .chip.warn { color: var(--neon-3); border-color: rgba(167,139,250,0.4); }
+
+      /* ---- right panel — terminal ---- */
+      .terminal {
+        background: rgba(0,8,20,0.85);
+        border: 1px solid var(--neon-1);
+        border-radius: 4px;
+        padding: 14px;
+        position: relative;
+        box-shadow: 0 0 60px rgba(77,125,255,0.15),
+                    inset 0 0 60px rgba(77,125,255,0.04);
+        backdrop-filter: blur(6px);
+      }
+      .terminal::before {
+        content: '';
+        position: absolute; inset: -1px;
+        border-radius: 4px;
+        background: linear-gradient(45deg, var(--neon-1), var(--neon-2), var(--neon-3), var(--neon-1));
+        background-size: 300% 300%;
+        z-index: -1;
+        filter: blur(8px);
+        animation: shimmer 6s linear infinite;
+        opacity: 0.5;
+      }
+      @keyframes shimmer {
+        from { background-position: 0% 0%; }
+        to   { background-position: 300% 0%; }
+      }
+      .term-bar {
+        display: flex; justify-content: space-between; align-items: center;
+        font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+        color: var(--neon-1);
+        padding-bottom: 10px; margin-bottom: 14px;
+        border-bottom: 1px dashed rgba(77,125,255,0.3);
+      }
+      .term-bar .knobs { display: inline-flex; gap: 4px; }
+      .term-bar .knob { width: 8px; height: 8px; background: var(--neon-1); border-radius: 50%; box-shadow: 0 0 8px var(--neon-1); }
+      .term-bar .knob.b { background: var(--neon-2); box-shadow: 0 0 8px var(--neon-2); }
+      .term-bar .knob.c { background: var(--neon-3); box-shadow: 0 0 8px var(--neon-3); }
+
+      .seg {
+        display: flex; gap: 0;
+        margin-bottom: 14px;
+        font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      }
+      .seg button {
+        all: unset;
+        flex: 1; text-align: center;
+        padding: 10px;
+        border: 1px solid rgba(77,125,255,0.3);
+        color: rgba(255,255,255,0.6);
+        cursor: pointer;
+        transition: all .2s;
+      }
+      .seg button + button { border-left: none; }
+      .seg button.on {
+        background: var(--neon-1);
+        color: #05060a;
+        font-weight: 700;
+        box-shadow: 0 0 18px var(--neon-1);
+      }
+
+      .field {
+        margin-bottom: 10px;
+        position: relative;
+      }
+      .field-lbl {
+        font-size: 10px; letter-spacing: 3px;
+        color: var(--neon-1);
+        margin-bottom: 4px;
+      }
+      .field-lbl::before { content: '> '; }
+      .field input {
+        width: 100%;
+        background: #000;
+        border: 1px solid rgba(77,125,255,0.3);
+        color: var(--neon-1);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        padding: 10px 12px;
+        outline: none;
+        caret-color: var(--neon-1);
+        transition: border-color .2s, box-shadow .2s;
+      }
+      .field input:focus {
+        border-color: var(--neon-1);
+        box-shadow: 0 0 12px rgba(77,125,255,0.4) inset;
+      }
+      .field input::placeholder { color: rgba(77,125,255,0.3); }
+
+      .execute {
+        width: 100%;
+        margin-top: 8px;
+        background: var(--neon-2);
+        color: #000;
+        border: none;
+        padding: 14px;
+        font-family: 'Orbitron', sans-serif;
+        font-weight: 900;
+        font-size: 14px;
+        letter-spacing: 4px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 24px rgba(139,92,255,0.5);
+        transition: transform .15s;
+      }
+      .execute:hover {
+        background: var(--neon-1);
+        box-shadow: 0 0 24px rgba(77,125,255,0.7);
+      }
+      .execute:active { transform: scale(.98); }
+
+      .status {
+        margin-top: 10px;
+        font-size: 10px; letter-spacing: 2px;
+        color: rgba(255,255,255,0.5);
+        display: flex; justify-content: space-between;
+      }
+      .status a { color: var(--neon-3); text-decoration: none; }
+
+      @media (max-width: 920px) {
+        .booth { grid-template-columns: 1fr; }
+        .sun { width: 260px; height: 260px; top: 24%; }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="sky" aria-hidden="true"></div>
+    <div class="sun" aria-hidden="true"></div>
+    <div class="floor" aria-hidden="true"></div>
+    <div class="scan" aria-hidden="true"></div>
+
+    <div class="hud">
+      <span class="left">
+        <span class="dot"></span>
+        <span>SYS // PRE-VIS-AI v0.9</span>
+        <span id="clock">00:00:00 UTC</span>
+      </span>
+      <span class="right">
+        <span>NODE: STUDIO-04</span>
+        <span>STATUS: STANDBY</span>
+      </span>
+    </div>
+
+    <main>
+      <div class="booth">
+        <section class="left-panel">
+          <span class="label">Director's Booth</span>
+          <h1 class="glitch" data-text="Boot the Storyboard.">
+            <span>Boot the</span>
+            <span>Storyboard.</span>
+          </h1>
+          <p class="typer"><span id="typed"></span><span class="caret"></span></p>
+
+          <div class="chips">
+            <span class="chip">SORA</span>
+            <span class="chip alt">RUNWAY</span>
+            <span class="chip warn">HIGGSFIELD</span>
+            <span class="chip">KLING</span>
+            <span class="chip alt">// MULTI-MODEL</span>
+          </div>
+        </section>
+
+        <aside class="terminal">
+          <div class="term-bar">
+            <span>~/previs/auth.sh</span>
+            <span class="knobs"><span class="knob"></span><span class="knob b"></span><span class="knob c"></span></span>
+          </div>
+
+          <div class="seg" role="tablist">
+            <button class="on" data-mode="signin">Sign In</button>
+            <button data-mode="signup">Register</button>
+          </div>
+
+          <form onsubmit="return false;">
+            <div class="field" id="nameField" hidden>
+              <div class="field-lbl">handle</div>
+              <input type="text" placeholder="director_xxx" />
+            </div>
+            <div class="field">
+              <div class="field-lbl">email</div>
+              <input type="email" placeholder="you@studio.com" />
+            </div>
+            <div class="field">
+              <div class="field-lbl">passkey</div>
+              <input type="password" placeholder="•••••••••" />
+            </div>
+            <button class="execute" id="exec">EXECUTE</button>
+            <div class="status">
+              <span>// SSL · 256-bit</span>
+              <a href="../login/index.html">classic_signin →</a>
+            </div>
+          </form>
+        </aside>
+      </div>
+    </main>
+
+    <script>
+      // typewriter
+      const lines = [
+        "> initializing pre-vis pipeline...",
+        "> linking sora · runway · higgsfield · kling...",
+        "> studio offline — authentication required.",
+      ];
+      const target = document.getElementById('typed');
+      let li = 0, ci = 0;
+      function type() {
+        if (li >= lines.length) return;
+        const l = lines[li];
+        if (ci <= l.length) {
+          target.textContent = lines.slice(0, li).join('\n') + (li ? '\n' : '') + l.slice(0, ci);
+          ci++;
+          setTimeout(type, 28);
+        } else {
+          li++; ci = 0;
+          setTimeout(type, 480);
+        }
+      }
+      type();
+
+      // clock
+      const clk = document.getElementById('clock');
+      setInterval(() => {
+        const d = new Date();
+        clk.textContent = d.toUTCString().slice(17, 25) + ' UTC';
+      }, 1000);
+
+      // tabs
+      const seg = document.querySelectorAll('.seg button');
+      const exec = document.getElementById('exec');
+      const nameField = document.getElementById('nameField');
+      seg.forEach(b => b.addEventListener('click', () => {
+        seg.forEach(x => x.classList.remove('on'));
+        b.classList.add('on');
+        const signup = b.dataset.mode === 'signup';
+        nameField.hidden = !signup;
+        exec.textContent = signup ? 'REGISTER' : 'EXECUTE';
+      }));
+      exec.addEventListener('click', () => {
+        exec.textContent = 'CONNECTING...';
+        setTimeout(() => location.href = '../login/index.html', 500);
+      });
+
+
+    </script>
+  </body>
+</html>

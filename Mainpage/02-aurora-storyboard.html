@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Compose the Frame</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; }
+      body {
+        font-family: 'Inter', sans-serif;
+        background: #05060a;
+        color: #ffffff;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* ---- aurora mesh ---- */
+      .aurora {
+        position: fixed; inset: -20%;
+        z-index: 0;
+        filter: blur(80px) saturate(140%);
+        opacity: 0.95;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        mix-blend-mode: screen;
+        will-change: transform;
+      }
+      .blob.b1 { width: 60vw; height: 60vw; left: -10vw; top: -20vh;
+        background: radial-gradient(circle, #8b5cff 0%, transparent 60%);
+        animation: drift1 18s ease-in-out infinite alternate; }
+      .blob.b2 { width: 70vw; height: 70vw; right: -20vw; top: 0;
+        background: radial-gradient(circle, #4d7dff 0%, transparent 60%);
+        animation: drift2 22s ease-in-out infinite alternate; }
+      .blob.b3 { width: 50vw; height: 50vw; left: 20vw; bottom: -20vh;
+        background: radial-gradient(circle, #6b91ff 0%, transparent 60%);
+        animation: drift3 26s ease-in-out infinite alternate; }
+      .blob.b4 { width: 40vw; height: 40vw; right: 10vw; bottom: -10vh;
+        background: radial-gradient(circle, #a78bfa 0%, transparent 60%);
+        animation: drift4 30s ease-in-out infinite alternate; }
+      @keyframes drift1 { from { transform: translate(0,0) scale(1); } to { transform: translate(8vw,6vh) scale(1.15); } }
+      @keyframes drift2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-10vw,4vh) scale(1.1); } }
+      @keyframes drift3 { from { transform: translate(0,0) scale(1); } to { transform: translate(-6vw,-8vh) scale(1.2); } }
+      @keyframes drift4 { from { transform: translate(0,0) scale(1); } to { transform: translate(6vw,-4vh) scale(1.05); } }
+
+      /* dotgrid overlay */
+      .grid {
+        position: fixed; inset: 0; z-index: 1;
+        background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+        background-size: 22px 22px;
+        pointer-events: none;
+        mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+      }
+
+      header {
+        position: fixed; top: 0; left: 0; right: 0;
+        padding: 22px 40px;
+        display: flex; justify-content: space-between; align-items: center;
+        z-index: 5;
+      }
+      .brand {
+        display: inline-flex; align-items: center; gap: 10px;
+        font-weight: 600; letter-spacing: 0.5px;
+      }
+      .brand img { width: 26px; height: 26px; filter: drop-shadow(0 0 8px rgba(139,92,255,.6)); }
+      .nav-pill {
+        display: inline-flex; gap: 8px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 999px;
+        padding: 6px;
+        backdrop-filter: blur(12px);
+      }
+      .nav-pill a {
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        padding: 8px 14px;
+        font-size: 13px;
+        border-radius: 999px;
+        transition: background .2s, color .2s;
+      }
+      .nav-pill a:hover { background: rgba(255,255,255,0.08); color: #fff; }
+
+      /* ---- stage ---- */
+      .stage {
+        position: relative; z-index: 4;
+        height: 100vh;
+        display: flex; align-items: center; justify-content: center;
+      }
+
+      .center {
+        position: relative;
+        width: min(560px, 92vw);
+        text-align: center;
+        z-index: 6;
+      }
+
+      .pre-line {
+        font-size: 12px; letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(255,255,255,0.6);
+        margin-bottom: 16px;
+        opacity: 0; animation: up .8s .2s forwards;
+      }
+
+      h1 {
+        font-family: 'Fraunces', serif;
+        font-weight: 500;
+        font-size: clamp(48px, 7vw, 84px);
+        line-height: 0.96;
+        letter-spacing: -0.02em;
+        margin-bottom: 18px;
+        opacity: 0; animation: up .9s .35s forwards;
+      }
+      h1 em {
+        font-style: italic;
+        background: linear-gradient(90deg, #8b5cff, #a78bfa, #6b91ff, #4d7dff, #8b5cff);
+        background-size: 300% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: shimmer 8s linear infinite;
+      }
+      @keyframes shimmer {
+        from { background-position: 0% 50%; }
+        to   { background-position: 300% 50%; }
+      }
+
+      .sub {
+        font-size: 16px; line-height: 1.6;
+        color: rgba(255,255,255,0.78);
+        max-width: 460px;
+        margin: 0 auto 32px;
+        opacity: 0; animation: up .9s .5s forwards;
+      }
+
+      .auth-card {
+        background: rgba(15, 18, 32, 0.65);
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(24px) saturate(140%);
+        -webkit-backdrop-filter: blur(24px) saturate(140%);
+        border-radius: 28px;
+        padding: 28px;
+        box-shadow: 0 30px 80px rgba(0,0,0,0.5),
+                    inset 0 1px 0 rgba(255,255,255,0.08);
+        opacity: 0; animation: up 1s .65s forwards;
+      }
+
+      .tabs {
+        display: flex;
+        background: rgba(0,0,0,0.3);
+        border-radius: 999px;
+        padding: 4px;
+        margin-bottom: 18px;
+      }
+      .tabs button {
+        flex: 1; all: unset;
+        text-align: center;
+        padding: 10px;
+        font-size: 13px; font-weight: 500;
+        color: rgba(255,255,255,0.6);
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all .25s;
+      }
+      .tabs button.on {
+        background: linear-gradient(90deg, #8b5cff, #4d7dff);
+        color: #fff;
+        box-shadow: 0 6px 20px rgba(77,125,255,0.5);
+      }
+
+      .field {
+        display: block;
+        margin-bottom: 12px;
+        position: relative;
+      }
+      .field input {
+        width: 100%;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px;
+        padding: 14px 16px;
+        color: #fff;
+        font-size: 15px;
+        outline: none;
+        transition: border-color .2s, background .2s;
+      }
+      .field input:focus {
+        border-color: #8b5cff;
+        background: rgba(139,92,255,0.05);
+      }
+      .field input::placeholder { color: rgba(255,255,255,0.4); }
+
+      .cta {
+        width: 100%;
+        margin-top: 6px;
+        padding: 15px;
+        border: none; border-radius: 14px;
+        background: linear-gradient(90deg, #8b5cff, #4d7dff, #6b91ff);
+        background-size: 200% 100%;
+        color: #fff;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-position .4s, transform .15s;
+        box-shadow: 0 10px 30px rgba(77,125,255,0.5);
+      }
+      .cta:hover { background-position: 100% 0; transform: translateY(-1px); }
+      .cta:active { transform: translateY(0); }
+
+      .alt {
+        margin-top: 14px;
+        font-size: 12px;
+        color: rgba(255,255,255,0.55);
+      }
+      .alt a { color: #a78bfa; text-decoration: none; }
+
+      /* ---- floating storyboard frames ---- */
+      .frame {
+        position: absolute;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.1);
+        backdrop-filter: blur(8px);
+        border-radius: 14px;
+        padding: 8px;
+        font-size: 11px;
+        color: rgba(255,255,255,0.7);
+        z-index: 3;
+        animation: float 10s ease-in-out infinite;
+        will-change: transform;
+      }
+      .frame .thumb {
+        width: 140px; height: 80px;
+        border-radius: 8px;
+        margin-bottom: 6px;
+        background-size: cover; background-position: center;
+      }
+      .frame .meta {
+        display: flex; justify-content: space-between;
+        font-size: 10px; letter-spacing: 1px;
+        color: rgba(255,255,255,0.5);
+      }
+      .frame .meta b { color: #a78bfa; font-weight: 600; }
+
+      .f1 { top: 12%; left: 6%; animation-delay: 0s; transform: rotate(-6deg); }
+      .f1 .thumb { background: linear-gradient(135deg, #8b5cff, #4d7dff); }
+      .f2 { top: 10%; right: 4%; animation-delay: 1.5s; transform: rotate(8deg); }
+      .f2 .thumb { background: linear-gradient(135deg, #6b91ff, #4d7dff); }
+      .f3 { bottom: 12%; left: 8%; animation-delay: 3s; transform: rotate(5deg); }
+      .f3 .thumb { background: linear-gradient(135deg, #a78bfa, #8b5cff); }
+      .f4 { bottom: 8%; right: 6%; animation-delay: 4.5s; transform: rotate(-4deg); }
+      .f4 .thumb { background: linear-gradient(135deg, #4d7dff, #6b91ff); }
+
+      @keyframes float {
+        0%,100% { translate: 0 0; }
+        50%     { translate: 0 -22px; }
+      }
+      @keyframes up {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .models {
+        position: fixed; left: 0; right: 0; bottom: 18px;
+        text-align: center; z-index: 5;
+        font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+        color: rgba(255,255,255,0.4);
+      }
+      .models b {
+        color: rgba(255,255,255,0.85);
+        font-weight: 500;
+        margin: 0 6px;
+      }
+
+      @media (max-width: 760px) {
+        .frame { display: none; }
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="blob b4"></div>
+    </div>
+    <div class="grid" aria-hidden="true"></div>
+
+    <header>
+      <span class="brand">
+        <img src="../assets/favicon.ico" alt="" />
+        PreVisAI
+      </span>
+      <nav class="nav-pill">
+        <a href="#">Studio</a>
+        <a href="#">Reels</a>
+        <a href="#">Pricing</a>
+        <a href="#">Docs</a>
+      </nav>
+    </header>
+
+    <div class="frame f1"><div class="thumb"></div><div class="meta"><span>SCN 12 · Wide</span><b>Sora</b></div></div>
+    <div class="frame f2"><div class="thumb"></div><div class="meta"><span>SCN 04 · OTS</span><b>Runway</b></div></div>
+    <div class="frame f3"><div class="thumb"></div><div class="meta"><span>SCN 22 · Push-In</span><b>Kling</b></div></div>
+    <div class="frame f4"><div class="thumb"></div><div class="meta"><span>SCN 08 · Pan</span><b>Higgsfield</b></div></div>
+
+    <main class="stage">
+      <div class="center">
+        <p class="pre-line">PreVis Studio · v0.9</p>
+        <h1>Compose the<br/><em>frame before it exists.</em></h1>
+        <p class="sub">
+          Storyboard, pre-vis, and direct multi-model AI cinematography from
+          one canvas. Welcome back, or join the rolling shot.
+        </p>
+
+        <div class="auth-card">
+          <div class="tabs">
+            <button class="on" data-mode="signin">Sign In</button>
+            <button data-mode="signup">Create Studio</button>
+          </div>
+          <form onsubmit="return false;">
+            <label class="field" id="nameField" hidden>
+              <input type="text" placeholder="Studio or team name" />
+            </label>
+            <label class="field">
+              <input type="email" placeholder="you@studio.com" />
+            </label>
+            <label class="field">
+              <input type="password" placeholder="Password" />
+            </label>
+            <button class="cta" id="go">Open Studio →</button>
+            <p class="alt">By continuing you agree to the <a href="#">terms</a>.
+              Already setup? <a href="../login/index.html">classic sign-in</a></p>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <p class="models">Powers <b>Sora</b> · <b>Runway</b> · <b>Higgsfield</b> · <b>Kling</b></p>
+
+    <script>
+      // tab toggle
+      const tabs = document.querySelectorAll('.tabs button');
+      const nameField = document.getElementById('nameField');
+      const cta = document.getElementById('go');
+      tabs.forEach(t => t.addEventListener('click', () => {
+        tabs.forEach(x => x.classList.remove('on'));
+        t.classList.add('on');
+        const signup = t.dataset.mode === 'signup';
+        nameField.hidden = !signup;
+        cta.textContent = signup ? 'Create Studio →' : 'Open Studio →';
+      }));
+      cta.addEventListener('click', () => {
+        cta.style.transform = 'scale(.97)';
+        setTimeout(() => location.href = '../login/index.html', 280);
+      });
+
+      // parallax on cursor
+      const frames = document.querySelectorAll('.frame');
+      const blobs = document.querySelectorAll('.blob');
+      window.addEventListener('mousemove', (e) => {
+        const x = (e.clientX / innerWidth - 0.5);
+        const y = (e.clientY / innerHeight - 0.5);
+        frames.forEach((f, i) => {
+          const k = (i + 1) * 12;
+          f.style.translate = `${x * k}px ${y * k}px`;
+        });
+        blobs.forEach((b, i) => {
+          const k = (i + 1) * 18;
+          b.style.translate = `${x * k}px ${y * k}px`;
+        });
+      });
+
+
+    </script>
+  </body>
+</html>

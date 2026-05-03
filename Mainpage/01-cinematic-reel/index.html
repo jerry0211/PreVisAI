@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Roll Camera</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,700;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="iris" aria-hidden="true"></div>
+    <div class="rail left" aria-hidden="true">
+      <div class="perf"></div><div class="perf"></div><div class="perf"></div>
+      <div class="perf"></div><div class="perf"></div><div class="perf"></div>
+      <div class="perf"></div><div class="perf"></div><div class="perf"></div>
+    </div>
+    <div class="rail right" aria-hidden="true">
+      <div class="perf"></div><div class="perf"></div><div class="perf"></div>
+      <div class="perf"></div><div class="perf"></div><div class="perf"></div>
+      <div class="perf"></div><div class="perf"></div><div class="perf"></div>
+    </div>
+
+    <header class="top">
+      <span class="slate"><span class="blink"></span> Reel 01 / Take 03</span>
+      <span>PreVisAI Pictures</span>
+      <span>24 fps · 4K · Aspect 2.39:1</span>
+    </header>
+
+    <main class="stage">
+      <section>
+        <span class="tag">A Pre-Visualization Studio</span>
+        <h1 class="marquee-title">
+          <span class="word" data-text="Roll">Roll</span>
+          <span class="word" data-text="Camera,">Camera,</span>
+          <span class="word" data-text="Director.">Director.</span>
+        </h1>
+        <p class="lede">
+          PreVisAI is the writer's room, the storyboard table, and the cutting bay
+          for AI-driven previsualization. Compose with Sora, Runway, Higgsfield,
+          and Kling — all from a single slate.
+        </p>
+        <div class="genres">
+          <div class="genres-track">
+            <span>Sci-Fi</span><span>Western</span><span>Noir</span><span>Romance</span>
+            <span>Anime</span><span>Documentary</span><span>Thriller</span><span>Fantasy</span>
+            <span>Sci-Fi</span><span>Western</span><span>Noir</span><span>Romance</span>
+            <span>Anime</span><span>Documentary</span><span>Thriller</span><span>Fantasy</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="ticket">
+        <div class="ticket-perf"></div>
+        <div class="row"><span>Admit One</span><span>No. 0451</span></div>
+        <h2>Studio Pass</h2>
+        <p style="font-size:13px;color:rgba(255,255,255,0.55);margin-bottom:24px;">
+          Sign in to your editing bay or claim a fresh production credit.
+        </p>
+
+        <div class="seg" role="tablist">
+          <button class="on" data-mode="signin">Sign In</button>
+          <button data-mode="signup">Sign Up</button>
+        </div>
+
+        <form id="form" onsubmit="return false;">
+          <label class="field" id="nameField" hidden>
+            <span class="field-lbl">Director's Name</span>
+            <input type="text" placeholder="Stanley K." />
+          </label>
+          <label class="field">
+            <span class="field-lbl">Email</span>
+            <input type="email" placeholder="you@studio.com" />
+          </label>
+          <label class="field">
+            <span class="field-lbl">Password</span>
+            <input type="password" placeholder="••••••••" />
+          </label>
+          <button class="roll" id="cta">ACTION →</button>
+          <p class="alt">Or <a href="../../login/index.html">jump to the legacy sign-in</a></p>
+        </form>
+      </aside>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

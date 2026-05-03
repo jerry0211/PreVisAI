@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Enter the Reel</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="nebula" aria-hidden="true"></div>
+
+    <svg class="liquid" aria-hidden="true" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="22" />
+          <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -12" />
+        </filter>
+        <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#a78bfa" />
+          <stop offset="100%" stop-color="#6b91ff" />
+        </radialGradient>
+        <radialGradient id="g2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#4d7dff" />
+          <stop offset="100%" stop-color="#6b91ff" />
+        </radialGradient>
+      </defs>
+      <g filter="url(#goo)">
+        <circle cx="200" cy="200" r="120" fill="url(#g1)">
+          <animate attributeName="cx" values="200;320;200" dur="14s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="200;320;200" dur="11s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="1000" cy="180" r="140" fill="url(#g2)">
+          <animate attributeName="cx" values="1000;860;1000" dur="13s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="180;300;180" dur="16s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="900" cy="650" r="160" fill="url(#g1)">
+          <animate attributeName="cx" values="900;760;900" dur="17s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="650;520;650" dur="12s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="280" cy="640" r="130" fill="url(#g2)">
+          <animate attributeName="cx" values="280;420;280" dur="15s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="640;540;640" dur="13s" repeatCount="indefinite" />
+        </circle>
+      </g>
+    </svg>
+
+    <header class="top">
+      <span class="brand"><img src="../../assets/favicon.ico" alt="" /> PreVisAI</span>
+      <span class="pill">v0.9 · Studio</span>
+    </header>
+
+    <main class="stage">
+      <section class="crystal">
+        <p class="eyebrow"><span class="dot"></span> Studio is online</p>
+        <h1>Enter the<br/><em>reel.</em></h1>
+        <p class="sub">
+          A pre-visualization studio for filmmakers — built around Sora,
+          Runway, Higgsfield, and Kling.
+        </p>
+
+        <div class="seg" role="tablist">
+          <button class="on" data-mode="signin">Sign In</button>
+          <button data-mode="signup">Create Account</button>
+        </div>
+
+        <form onsubmit="return false;">
+          <div class="field" id="nameField" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+            </svg>
+            <input type="text" placeholder="Your name" />
+          </div>
+          <div class="field">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" />
+            </svg>
+            <input type="email" placeholder="you@studio.com" />
+          </div>
+          <div class="field">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="11" width="16" height="9" rx="2" />
+              <path d="M8 11V7a4 4 0 1 1 8 0v4" />
+            </svg>
+            <input type="password" placeholder="Password" />
+          </div>
+          <button class="enter" id="enter">Enter the studio →</button>
+
+          <div class="divider">or</div>
+          <div class="providers">
+            <button type="button">Google</button>
+            <button type="button">SSO</button>
+          </div>
+
+          <p class="foot">
+            Trouble? Use the <a href="../../login/index.html">classic sign-in</a>.
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <div class="models" aria-hidden="true">
+      <span>Sora</span>
+      <span>Runway</span>
+      <span>Higgsfield</span>
+      <span>Kling</span>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

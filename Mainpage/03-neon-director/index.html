@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Director's Booth</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&display=swap" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="sky" aria-hidden="true"></div>
+    <div class="sun" aria-hidden="true"></div>
+    <div class="floor" aria-hidden="true"></div>
+    <div class="scan" aria-hidden="true"></div>
+
+    <div class="hud">
+      <span class="left">
+        <span class="dot"></span>
+        <span>SYS // PRE-VIS-AI v0.9</span>
+        <span id="clock">00:00:00 UTC</span>
+      </span>
+      <span class="right">
+        <span>NODE: STUDIO-04</span>
+        <span>STATUS: STANDBY</span>
+      </span>
+    </div>
+
+    <main>
+      <div class="booth">
+        <section class="left-panel">
+          <span class="label">Director's Booth</span>
+          <h1 class="glitch" data-text="Boot the Storyboard.">
+            <span>Boot the</span>
+            <span>Storyboard.</span>
+          </h1>
+          <p class="typer"><span id="typed"></span><span class="caret"></span></p>
+
+          <div class="chips">
+            <span class="chip">SORA</span>
+            <span class="chip alt">RUNWAY</span>
+            <span class="chip warn">HIGGSFIELD</span>
+            <span class="chip">KLING</span>
+            <span class="chip alt">// MULTI-MODEL</span>
+          </div>
+        </section>
+
+        <aside class="terminal">
+          <div class="term-bar">
+            <span>~/previs/auth.sh</span>
+            <span class="knobs"><span class="knob"></span><span class="knob b"></span><span class="knob c"></span></span>
+          </div>
+
+          <div class="seg" role="tablist">
+            <button class="on" data-mode="signin">Sign In</button>
+            <button data-mode="signup">Register</button>
+          </div>
+
+          <form onsubmit="return false;">
+            <div class="field" id="nameField" hidden>
+              <div class="field-lbl">handle</div>
+              <input type="text" placeholder="director_xxx" />
+            </div>
+            <div class="field">
+              <div class="field-lbl">email</div>
+              <input type="email" placeholder="you@studio.com" />
+            </div>
+            <div class="field">
+              <div class="field-lbl">passkey</div>
+              <input type="password" placeholder="•••••••••" />
+            </div>
+            <button class="execute" id="exec">EXECUTE</button>
+            <div class="status">
+              <span>// SSL · 256-bit</span>
+              <a href="../../login/index.html">classic_signin →</a>
+            </div>
+          </form>
+        </aside>
+      </div>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

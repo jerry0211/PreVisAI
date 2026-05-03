@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Compose the Frame</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,500;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true">
+      <div class="blob b1"></div>
+      <div class="blob b2"></div>
+      <div class="blob b3"></div>
+      <div class="blob b4"></div>
+    </div>
+    <div class="grid" aria-hidden="true"></div>
+
+    <header>
+      <span class="brand">
+        <img src="../../assets/favicon.ico" alt="" />
+        PreVisAI
+      </span>
+      <nav class="nav-pill">
+        <a href="#">Studio</a>
+        <a href="#">Reels</a>
+        <a href="#">Pricing</a>
+        <a href="#">Docs</a>
+      </nav>
+    </header>
+
+    <div class="frame f1"><div class="thumb"></div><div class="meta"><span>SCN 12 · Wide</span><b>Sora</b></div></div>
+    <div class="frame f2"><div class="thumb"></div><div class="meta"><span>SCN 04 · OTS</span><b>Runway</b></div></div>
+    <div class="frame f3"><div class="thumb"></div><div class="meta"><span>SCN 22 · Push-In</span><b>Kling</b></div></div>
+    <div class="frame f4"><div class="thumb"></div><div class="meta"><span>SCN 08 · Pan</span><b>Higgsfield</b></div></div>
+
+    <main class="stage">
+      <div class="center">
+        <p class="pre-line">PreVis Studio · v0.9</p>
+        <h1>Compose the<br/><em>frame before it exists.</em></h1>
+        <p class="sub">
+          Storyboard, pre-vis, and direct multi-model AI cinematography from
+          one canvas. Welcome back, or join the rolling shot.
+        </p>
+
+        <div class="auth-card">
+          <div class="tabs">
+            <button class="on" data-mode="signin">Sign In</button>
+            <button data-mode="signup">Create Studio</button>
+          </div>
+          <form onsubmit="return false;">
+            <label class="field" id="nameField" hidden>
+              <input type="text" placeholder="Studio or team name" />
+            </label>
+            <label class="field">
+              <input type="email" placeholder="you@studio.com" />
+            </label>
+            <label class="field">
+              <input type="password" placeholder="Password" />
+            </label>
+            <button class="cta" id="go">Open Studio →</button>
+            <p class="alt">By continuing you agree to the <a href="#">terms</a>.
+              Already setup? <a href="../../login/index.html">classic sign-in</a></p>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <p class="models">Powers <b>Sora</b> · <b>Runway</b> · <b>Higgsfield</b> · <b>Kling</b></p>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

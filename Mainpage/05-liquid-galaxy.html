@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PreVisAI — Enter the Reel</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" />
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { height: 100%; }
+      body {
+        background: #05060a;
+        color: #ffffff;
+        font-family: 'Inter', sans-serif;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* ---- starfield canvas ---- */
+      #stars {
+        position: fixed; inset: 0; z-index: 1;
+        display: block;
+      }
+
+      /* ---- nebula glow ---- */
+      .nebula {
+        position: fixed; inset: 0; z-index: 2;
+        background:
+          radial-gradient(ellipse at 20% 30%, rgba(107,145,255,0.4), transparent 50%),
+          radial-gradient(ellipse at 80% 70%, rgba(139,92,255,0.35), transparent 55%),
+          radial-gradient(ellipse at 50% 90%, rgba(77,125,255,0.3), transparent 50%);
+        pointer-events: none;
+        animation: nebula 18s ease-in-out infinite alternate;
+      }
+      @keyframes nebula {
+        from { transform: scale(1) rotate(0); opacity: .9; }
+        to   { transform: scale(1.1) rotate(8deg); opacity: 1; }
+      }
+
+      /* ---- liquid metaballs (svg) ---- */
+      .liquid {
+        position: fixed; inset: 0; z-index: 3;
+        pointer-events: none;
+        opacity: 0.85;
+      }
+
+      /* ---- top bar ---- */
+      .top {
+        position: fixed; top: 0; left: 0; right: 0;
+        padding: 22px 36px;
+        display: flex; justify-content: space-between; align-items: center;
+        z-index: 10;
+      }
+      .brand {
+        display: inline-flex; align-items: center; gap: 10px;
+        font-weight: 600; letter-spacing: 0.3px;
+      }
+      .brand img {
+        width: 26px; height: 26px;
+        filter: drop-shadow(0 0 10px rgba(107,145,255,0.6));
+      }
+      .pill {
+        font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+        color: rgba(255,255,255,0.6);
+        padding: 8px 14px;
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 999px;
+        backdrop-filter: blur(6px);
+      }
+
+      /* ---- main stage ---- */
+      .stage {
+        position: relative; z-index: 5;
+        height: 100vh;
+        display: flex; align-items: center; justify-content: center;
+        padding: 60px 20px 40px;
+      }
+
+      .crystal {
+        width: min(440px, 92vw);
+        background: rgba(15, 18, 32, 0.55);
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 28px;
+        padding: 38px 32px;
+        backdrop-filter: blur(28px) saturate(160%);
+        -webkit-backdrop-filter: blur(28px) saturate(160%);
+        box-shadow:
+          0 30px 100px rgba(0,0,0,0.65),
+          inset 0 1px 0 rgba(255,255,255,0.1),
+          inset 0 -1px 0 rgba(107,145,255,0.2);
+        position: relative;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: rise 1s .3s cubic-bezier(.2,.8,.2,1) forwards;
+      }
+      .crystal::before {
+        content: '';
+        position: absolute; inset: -1px;
+        border-radius: 28px;
+        padding: 1px;
+        background: linear-gradient(135deg,
+          rgba(107,145,255,0.6),
+          rgba(139,92,255,0.4),
+          rgba(77,125,255,0.6));
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor; mask-composite: exclude;
+        pointer-events: none;
+      }
+      @keyframes rise {
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .eyebrow {
+        text-align: center;
+        font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+        color: rgba(255,255,255,0.6);
+        margin-bottom: 14px;
+      }
+      .eyebrow .dot {
+        display: inline-block;
+        width: 6px; height: 6px;
+        background: #4d7dff;
+        border-radius: 50%;
+        margin-right: 8px;
+        box-shadow: 0 0 8px #4d7dff;
+        animation: ping 2s ease-in-out infinite;
+      }
+      @keyframes ping {
+        0%,100% { opacity: 1; }
+        50%     { opacity: 0.3; }
+      }
+
+      h1 {
+        font-family: 'Instrument Serif', serif;
+        font-weight: 400;
+        font-size: 52px;
+        line-height: 1;
+        text-align: center;
+        letter-spacing: -0.01em;
+        margin-bottom: 14px;
+      }
+      h1 em {
+        font-style: italic;
+        background: linear-gradient(90deg, #a78bfa, #4d7dff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .sub {
+        text-align: center;
+        color: rgba(255,255,255,0.7);
+        font-size: 14px;
+        line-height: 1.55;
+        margin-bottom: 26px;
+      }
+
+      .seg {
+        display: flex;
+        background: rgba(0,0,0,0.35);
+        border-radius: 999px;
+        padding: 4px;
+        margin-bottom: 18px;
+      }
+      .seg button {
+        flex: 1; all: unset;
+        text-align: center;
+        font-size: 13px; font-weight: 500;
+        padding: 10px 0;
+        color: rgba(255,255,255,0.6);
+        cursor: pointer;
+        border-radius: 999px;
+        transition: all .25s;
+      }
+      .seg button.on {
+        background: linear-gradient(90deg, rgba(107,145,255,0.9), rgba(139,92,255,0.9));
+        color: #fff;
+        box-shadow: 0 6px 18px rgba(107,145,255,0.4);
+      }
+
+      .field {
+        position: relative;
+        margin-bottom: 12px;
+      }
+      .field input {
+        width: 100%;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 14px;
+        padding: 14px 16px 14px 44px;
+        color: #fff;
+        font-size: 14px;
+        outline: none;
+        transition: border-color .25s, background .25s;
+      }
+      .field input:focus {
+        border-color: rgba(77,125,255,0.6);
+        background: rgba(77,125,255,0.04);
+      }
+      .field input::placeholder { color: rgba(255,255,255,0.4); }
+      .field svg {
+        position: absolute; left: 14px; top: 50%;
+        transform: translateY(-50%);
+        width: 16px; height: 16px;
+        color: rgba(255,255,255,0.5);
+      }
+
+      .enter {
+        width: 100%;
+        margin-top: 8px;
+        padding: 15px;
+        border: none;
+        border-radius: 14px;
+        background: linear-gradient(120deg, #6b91ff, #8b5cff, #4d7dff, #6b91ff);
+        background-size: 300% 100%;
+        color: #fff;
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 14px 40px rgba(107,145,255,0.5);
+        animation: flow 6s linear infinite;
+        transition: transform .15s;
+      }
+      .enter:hover { transform: translateY(-1px); }
+      .enter:active { transform: translateY(0); }
+      @keyframes flow {
+        from { background-position: 0% 0%; }
+        to   { background-position: 300% 0%; }
+      }
+
+      .divider {
+        display: flex; align-items: center; gap: 12px;
+        margin: 18px 0 14px;
+        font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+        color: rgba(255,255,255,0.4);
+      }
+      .divider::before, .divider::after {
+        content: ''; flex: 1; height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      }
+
+      .providers {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+      }
+      .providers button {
+        all: unset; cursor: pointer;
+        text-align: center;
+        padding: 12px;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 12px;
+        font-size: 13px; font-weight: 500;
+        color: rgba(255,255,255,0.85);
+        background: rgba(255,255,255,0.03);
+        transition: background .2s, border-color .2s;
+      }
+      .providers button:hover {
+        background: rgba(255,255,255,0.06);
+        border-color: rgba(255,255,255,0.2);
+      }
+
+      .foot {
+        text-align: center;
+        margin-top: 18px;
+        font-size: 12px;
+        color: rgba(255,255,255,0.55);
+      }
+      .foot a { color: #4d7dff; text-decoration: none; }
+
+      /* ---- bottom model strip ---- */
+      .models {
+        position: fixed;
+        left: 50%; transform: translateX(-50%);
+        bottom: 22px;
+        z-index: 8;
+        display: flex; gap: 20px;
+        font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+        color: rgba(255,255,255,0.45);
+      }
+      .models span { position: relative; }
+      .models span:not(:last-child)::after {
+        content: '·'; position: absolute; right: -13px; color: rgba(255,255,255,0.25);
+      }
+
+    </style>
+  </head>
+  <body>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="nebula" aria-hidden="true"></div>
+
+    <svg class="liquid" aria-hidden="true" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <filter id="goo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="22" />
+          <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -12" />
+        </filter>
+        <radialGradient id="g1" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#a78bfa" />
+          <stop offset="100%" stop-color="#6b91ff" />
+        </radialGradient>
+        <radialGradient id="g2" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#4d7dff" />
+          <stop offset="100%" stop-color="#6b91ff" />
+        </radialGradient>
+      </defs>
+      <g filter="url(#goo)">
+        <circle cx="200" cy="200" r="120" fill="url(#g1)">
+          <animate attributeName="cx" values="200;320;200" dur="14s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="200;320;200" dur="11s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="1000" cy="180" r="140" fill="url(#g2)">
+          <animate attributeName="cx" values="1000;860;1000" dur="13s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="180;300;180" dur="16s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="900" cy="650" r="160" fill="url(#g1)">
+          <animate attributeName="cx" values="900;760;900" dur="17s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="650;520;650" dur="12s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="280" cy="640" r="130" fill="url(#g2)">
+          <animate attributeName="cx" values="280;420;280" dur="15s" repeatCount="indefinite" />
+          <animate attributeName="cy" values="640;540;640" dur="13s" repeatCount="indefinite" />
+        </circle>
+      </g>
+    </svg>
+
+    <header class="top">
+      <span class="brand"><img src="../assets/favicon.ico" alt="" /> PreVisAI</span>
+      <span class="pill">v0.9 · Studio</span>
+    </header>
+
+    <main class="stage">
+      <section class="crystal">
+        <p class="eyebrow"><span class="dot"></span> Studio is online</p>
+        <h1>Enter the<br/><em>reel.</em></h1>
+        <p class="sub">
+          A pre-visualization studio for filmmakers — built around Sora,
+          Runway, Higgsfield, and Kling.
+        </p>
+
+        <div class="seg" role="tablist">
+          <button class="on" data-mode="signin">Sign In</button>
+          <button data-mode="signup">Create Account</button>
+        </div>
+
+        <form onsubmit="return false;">
+          <div class="field" id="nameField" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 4-7 8-7s8 3 8 7" />
+            </svg>
+            <input type="text" placeholder="Your name" />
+          </div>
+          <div class="field">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 6 9-6" />
+            </svg>
+            <input type="email" placeholder="you@studio.com" />
+          </div>
+          <div class="field">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="4" y="11" width="16" height="9" rx="2" />
+              <path d="M8 11V7a4 4 0 1 1 8 0v4" />
+            </svg>
+            <input type="password" placeholder="Password" />
+          </div>
+          <button class="enter" id="enter">Enter the studio →</button>
+
+          <div class="divider">or</div>
+          <div class="providers">
+            <button type="button">Google</button>
+            <button type="button">SSO</button>
+          </div>
+
+          <p class="foot">
+            Trouble? Use the <a href="../login/index.html">classic sign-in</a>.
+          </p>
+        </form>
+      </section>
+    </main>
+
+    <div class="models" aria-hidden="true">
+      <span>Sora</span>
+      <span>Runway</span>
+      <span>Higgsfield</span>
+      <span>Kling</span>
+    </div>
+
+    <script>
+      // starfield
+      const c = document.getElementById('stars');
+      const ctx = c.getContext('2d');
+      let stars = [];
+      function size() {
+        c.width = innerWidth * devicePixelRatio;
+        c.height = innerHeight * devicePixelRatio;
+        c.style.width = innerWidth + 'px';
+        c.style.height = innerHeight + 'px';
+        stars = Array.from({ length: 220 }, () => ({
+          x: Math.random() * c.width,
+          y: Math.random() * c.height,
+          r: Math.random() * 1.6 + 0.3,
+          vx: (Math.random() - 0.5) * 0.06,
+          vy: (Math.random() - 0.5) * 0.06,
+          tw: Math.random() * Math.PI * 2,
+        }));
+      }
+      size();
+      addEventListener('resize', size);
+      function tick() {
+        ctx.clearRect(0, 0, c.width, c.height);
+        for (const s of stars) {
+          s.x += s.vx; s.y += s.vy; s.tw += 0.04;
+          if (s.x < 0) s.x = c.width; if (s.x > c.width) s.x = 0;
+          if (s.y < 0) s.y = c.height; if (s.y > c.height) s.y = 0;
+          const a = 0.5 + 0.5 * Math.sin(s.tw);
+          ctx.fillStyle = `rgba(255,255,255,${0.35 + a * 0.55})`;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r * devicePixelRatio, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        requestAnimationFrame(tick);
+      }
+      tick();
+
+      // tabs
+      const seg = document.querySelectorAll('.seg button');
+      const nameField = document.getElementById('nameField');
+      const enter = document.getElementById('enter');
+      seg.forEach(b => b.addEventListener('click', () => {
+        seg.forEach(x => x.classList.remove('on'));
+        b.classList.add('on');
+        const signup = b.dataset.mode === 'signup';
+        nameField.hidden = !signup;
+        enter.textContent = signup ? 'Create studio →' : 'Enter the studio →';
+      }));
+      enter.addEventListener('click', () => {
+        enter.textContent = 'Opening...';
+        setTimeout(() => location.href = '../login/index.html', 380);
+      });
+
+
+    </script>
+  </body>
+</html>
