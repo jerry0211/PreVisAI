@@ -1,30 +1,145 @@
-PROJECT: ORBITAL WITNESS
+기택
+(침 닦으며) ...어... 뭐?
 
-Premise: In 2089, a maintenance engineer named Mara Voss discovers that the luxury orbital hotel Eos Crown is hiding a weapons test inside its climate-control core.
+충숙
+우리 핸폰들 다 중지된 건 알지? 다른 집 와이파이 쓰던 것도 다 끊기구. 어쩔 거여...
+(툭 차며)
+어떡할 거야... 계획이 뭐냐고!
 
-World rules:
-- Artificial gravity flickers when the station changes orbit.
-- Security drones track heat signatures, not faces.
-- Blue service lights mark safe maintenance paths.
-- The exterior glass atrium faces Earth and reflects every moving body.
+구박을 받는 와중에도 온화한 미소를 띠며 일어나는 기택. 부시시... 부엌 겸 마루로 나간다. 텅 빈 냉장고에서 식빵 봉지를 꺼내는 기택. 양쪽 끝 껍데기만 남은 식빵에서 초록색 곰팡이 부분을 뜯어낸다.
 
-Characters:
-- Mara Voss: precise, exhausted, wearing a graphite repair suit with a cracked amber helmet visor.
-- Ilya Ren: station concierge, secretly helping Mara, communicates through short audio pings.
-- Sentinel Unit 6: matte white security drone with twin red sensor slits and a hovering stabilizer ring.
+와이파이 신호를 찾아 서성이는 아들내미를 바라보는 기택. 식빵을 씹으며,
 
-Scene 01: Docking Spine
-Mara crawls through the docking spine while tourist shuttles detach from the hotel. The corridor is cramped, noisy, and lit by amber warning strips. She overhears a corrupted maintenance call that mentions the climate-control core.
+기택
+기우야, 와이파이는...
+(팔을 위로 들며)
+높이 들어봐. 높이.
 
-Scene 02: Service Gallery
-Mara reaches the service gallery above the hotel ballroom. She watches guests dance beneath a glass floor while Ilya sends three warning pings through her headset. A patrol drone passes below without noticing her heat signature.
+기우
+네, 아버지.
 
-Scene 03: Atrium Breach
-Mara crosses the empty glass atrium to reach the climate-control elevator before Sentinel Unit 6 scans the floor. The hotel is in orbital sunset, so Earthlight washes the scene in blue and gold.
+핸드폰 높게 들며 화장실 안까지 들어가는 기우. 좁고 긴 화장실 끝에 계단식 제단(?)이 있고 그 위에 변기가 올라가 있다. 정화조와의 압력관계 때문에 일부 반지하 주택에서는 불가피한 변기 위치. 시각적으로는 좀 황당하다.
 
-Mara enters from camera-left, staying close to a line of blue service lights. Earth fills the background through the curved glass wall. Sentinel Unit 6 descends from the upper right balcony, projecting a red scan cone across the floor. Mara freezes behind a sculpture column, then kicks off during a gravity flicker and glides through the scan gap toward the elevator rail.
+제단 위 변기에 올라간 기우. 끈질기게 신호를 찾다가,
 
-Camera intent: tense, precise, no handheld shake. Start with a locked wide composition, then transition into a smooth low dolly push with a slight roll during the gravity flicker.
+기우
+오예!
 
-Scene 04: Core Door
-The elevator opens onto a frozen maintenance deck. Mara finds the climate-control door sealed from the inside and realizes the weapons test has already started. The station begins venting heat toward the night side of Earth.
+기정
+잡혔어?
+
+대뜸 화장실로 들어오는 기정. 핸드폰을 치켜들고 변기 쪽으로 접근한다.
+
+기우
+잡히지? coffeenara_2G. 이거 새로 오픈한 건가? 근처에?
+
+기정
+난 왜 안 잡히지?
+
+기우
+이리로 바싹 올라와봐.
+
+기정, 핸드폰을 치켜들며 변기 위쪽으로 바싹 올라간다. 다들 머리가 천장에 꾹 닿은 채, 계단 위 변기에 엉겨붙은 남매의 기이한 모습을 바라보는 충숙.
+
+충숙
+‘피자시대’ 카톡 안 왔어? 이번에 이천 박스만 더하면 결산인데...
+
+#3. 반지하. 시간경과
+
+아직 접지 않은 피자박스의 원판들이 산더미처럼 쌓여 있고, 거실에 둘러앉은 기택과 식구들이 말없이 피자박스를 접고 있다. 사각사각 종이소리만 들려오는 가운데, 촌스러운 ‘피자시대’ 로고가 화면 앞을 오간다.
+
+순간, 밖에서 두두두— 방역기 소리가 들려오더니, 방역기가 내뿜는 소독약 흰 구름이 창밖으로 보인다. 무럭무럭 창문 쪽으로 다가오는 새하얀 소독연기.
+
+기정
+(기우 향해)
+창문 닫어.
+
+기택
+놔둬봐. 꽁짜로 집안 소독 하지 뭐. 곱등이도 죽일 겸...
+
+창문 닫으려 일어나다 그냥 앉는 기우. 창문을 통해서 새하얀 소독연기가 집안으로 덮쳐온다. 자욱한 흰 연기 속에서도 계속 피자박스를 접는 네 식구... 뭔가 처연한 느낌마저 드는데,
+
+충숙
+크액-캑!! 아우 씨발!
+
+기정
+(쿨럭이며)
+닫으랬지!
+
+기우
+에라이 진짜...
+
+괜찮은 척 고개 숙여 계속 박스만 접는 기택. 기침을 참느라 얼굴에 시뻘겋게 핏줄이 오른다.
+
+기우는 변기 옆에 놓아둔 핸드폰을 가져오더니, 다운받은 GIF 파일의 재생버튼을 누른다.
+
+기우
+이거 함 보세요, 들... 이 속도로 하면 오늘 중에 돈 받을 거 같애!
+
+화면에 반복 재생되는 ‘피자박스 달인’ 짤. 백인 여자애가 현란한 솜씨로 피자박스를 접는다. 실로 놀라운 스피드...
+
+경악스런 표정의 식구들. 뿌연 안개 속에서 더욱 열심히 박스를 접는다. 속도를 올려보려 용을 쓰는 기택. 그러나 손이 빨라질수록 뭔가 더 어설프고 불안해 보인다.
+
+#4. 반지하. 현관. 늦오후
+
+반쯤 열린 현관문. 독특한 인상의 피자집 여사장이 ‘피자시대’ 로고의 티셔츠를 입고 서 있다.
+
+여사장
+예를 들면 여기 함 봐요. 라인이 아주 드럽게 접혔죠?
+
+손에 든 피자박스의 한쪽 모서리를 충숙의 얼굴 앞에 들이미는 여사장.
+
+여사장
+박스 네 개에 한 개 꼴로 이런 상태야. 넷 중 하나는 불량인 거지.
+
+‘넷 중 하나’라는 표현에 식구들 모두 힐끔 기택을 바라본다. 변함없이 온화한 기택의 미소.
+
+충숙
+...
+(한숨)
+그래서 정말, 돈 십프로 떼고 주겠다는 거예요 지금?
+
+장면 바뀌면...
+
+집 앞 골목. ‘피자시대’ 다마스 차량에 중년남자가 피자박스를 잔뜩 싣고 있고, 기우는 분주히 박스들을 옮겨준다. 집안의 기택은 창너머로 충숙의 말다툼을 내다보고 있다.
+
+여사장
+불량율에 비하믄 패널티 적은 거지. 안 그래요?
+
+충숙
+아니 솔직히 인건비 이거 얼마나 한다고...
+
+여사장
+이봐요. 이게 그렇게 간단한 문제가 아니야. 이런 불량박스 하나하나가 얼마나 큰 데미지를 주는지 알아요? 우리 브랜드 이미지에?
+
+충숙
+브랜드?
+(피식)
+지점 딱 두 개던데? 여기랑 상계동, 조또...
+
+여사장
+(발끈)
+뭐라고!?
+
+재빨리 앞으로 나오는 기우. 엄마와 여사장 사이로 파고들며 부드러운 미소를 짓는다.
+
+기우
+사장님... 이게 다 그 놈 때문이죠?
+
+여사장
+...뭔 소리?
+
+기우
+원래 일하던 그 알바생 말입니다. 그 친구가 갑자기 배째고 잠수탔지요? 주사랑교회에서 단체주문이 계속 들어오는 이 중요한 시기에 말입니다. 그래서 지금 사장님 내외분이 이렇게 직접 뛰면서 고생하시는 거고...
+
+여사장
+참나... 그런 디테일은 또 어떻게 다 알어요? 어디서 들었어?
+
+기우
+그 펑크 낸 알바생이 제 동생 지인입니다.
+
+기정
+그 오빠 원래 좀 이상해요. 동네에서 평판이 디기 안 좋은데.
+
+기우
+그래서 말입니다 사장님. 오늘 이 박스들... 패널티 십프로, 좋습니다. 오늘 돈은 뭐 사장님 결정대로 주시구요. 그 대신에...
