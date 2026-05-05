@@ -13,7 +13,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     />
-    <link rel="stylesheet" href="./project-setup.css" />
+    <link rel="stylesheet" href="./project-setup.css?v=2" />
   </head>
   <body>
     <div class="bg-glow" aria-hidden="true"></div>
@@ -39,28 +39,14 @@
 
         
 
-        <nav class="hero-actions" aria-label="primary actions">
-          <button class="pill" type="button">
-            <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true">
-              <path d="M3 2 L9 6 L3 10 Z" fill="currentColor" />
-            </svg>
-            Watch Demo
-          </button>
-          <button class="pill" type="button">Request Access</button>
-          <button class="pill primary" id="newProjectButton" type="button">
-            Get Started <span aria-hidden="true">→</span>
-          </button>
-          <button class="pill" type="button">Docs</button>
-        </nav>
       </section>
 
       <section class="projects" aria-label="projects">
         <div class="section-head">
-          <span class="eyebrow">Project Library</span>
-          <h2>Your Projects</h2>
+          <span class="eyebrow">프로젝트 라이브러리</span>
+          <h2>프로젝트</h2>
           <p class="section-sub">
-            Each project holds an overarching scenario. Storyboards parse against this
-            scenario to produce a prompt and a motion-vector list.
+            각 프로젝트에는 전체 시나리오가 담깁니다. 스토리보드는 이 시나리오를 바탕으로 해석되어 프롬프트와 모션 벡터 리스트을 생성합니다.
           </p>
         </div>
 
@@ -69,8 +55,8 @@
         <button class="new-project-card" id="newProjectCard" type="button">
           <span class="plus" aria-hidden="true">+</span>
           <span class="new-project-text">
-            <strong>New Project</strong>
-            <small>Upload an overarching scenario</small>
+            <strong>새 프로젝트</strong>
+            <small>전체 시나리오를 업로드하세요.</small>
           </span>
         </button>
       </section>
@@ -80,8 +66,8 @@
       <form method="dialog" class="dialog-form">
         <header class="dialog-head">
           <div>
-            <span class="eyebrow">Project</span>
-            <h2 id="dialogTitle">New Project</h2>
+            <span class="eyebrow">프로젝트</span>
+            <h2 id="dialogTitle">새 프로젝트</h2>
           </div>
           <button class="dialog-close" id="dialogCloseButton" type="button" aria-label="Close">
             ×
@@ -89,18 +75,18 @@
         </header>
 
         <label class="field">
-          <span class="field-label">Project Name</span>
+          <span class="field-label">프로젝트명</span>
           <input
             id="projectName"
             name="projectName"
             type="text"
-            placeholder="e.g. Orbital Witness"
+            placeholder="예시: Orbital Witness"
             autocomplete="off"
           />
         </label>
 
         <label class="field file-field">
-          <span class="field-label">Scenario File</span>
+          <span class="field-label">시나리오 파일</span>
           <span class="file-control">
             <input
               id="scenarioFile"
@@ -108,14 +94,15 @@
               type="file"
               accept=".txt,text/plain"
             />
-            <span class="file-control-label">Choose .txt scenario</span>
-            <span class="file-control-hint">Plain-text scene rules &amp; world bible</span>
+            <span class="file-control-label">시나리오 텍스트 파일을 고르세요</span>
+            <span class="file-control-hint">배경 및 플롯 정의</span>
           </span>
         </label>
 
         <div class="preview-card">
-          <span class="preview-label">SCENARIO PREVIEW</span>
-          <pre id="scenarioPreview">Upload a .txt scenario file.</pre>
+          <span class="preview-label">시나리오 프리뷰</span>
+          <pre id="scenarioPreview">.txt 시나리오를 업로드하세요
+          </pre>
         </div>
 
         <div class="dialog-actions">
@@ -126,12 +113,12 @@
             type="submit"
             disabled
           >
-            Continue to Storyboard <span aria-hidden="true">→</span>
+            스토리보드로 계속 <span aria-hidden="true">→</span>
           </button>
         </div>
       </form>
     </dialog>
 
-    <script src="./project-setup.js"></script>
+    <script src="./project-setup.js?v=2"></script>
   </body>
 </html>

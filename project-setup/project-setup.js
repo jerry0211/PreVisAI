@@ -12,16 +12,26 @@ const dialogCloseButton = document.querySelector("#dialogCloseButton");
 const defaultProjects = ["Orbital Witness", "Glass Desert", "Signal Room"];
 
 const projectMeta = {
-  "Orbital Witness": "Sci-fi thriller · 4 scenes",
-  "Glass Desert": "Speculative drama · 3 scenes",
-  "Signal Room": "Espionage short · 2 scenes"
+  "Orbital Witness": "SF 스릴러 · 씬 4개",
+  "Glass Desert": "추리 드라마 · 씬 3개",
+  "Signal Room": "단편 첩보물 · 씬 2개"
 };
 
 let scenarioText = "";
 
 function getProjects() {
-  const savedProjects = JSON.parse(localStorage.getItem("projects") || "null");
-  return savedProjects || defaultProjects;
+  let savedProjects = null;
+  try {
+    savedProjects = JSON.parse(localStorage.getItem("projects") || "null");
+  } catch {
+    savedProjects = null;
+  }
+  // fall back to defaults on null, non-array, or empty array (otherwise
+  // a stale empty list in localStorage would silently kill the demo)
+  if (!Array.isArray(savedProjects) || savedProjects.length === 0) {
+    return defaultProjects;
+  }
+  return savedProjects;
 }
 
 function saveProjects(projects) {
@@ -48,7 +58,7 @@ function renderProjects() {
 
     const eyebrow = document.createElement("span");
     eyebrow.className = "project-eyebrow";
-    eyebrow.textContent = "Project";
+    eyebrow.textContent = "프로젝트";
 
     const title = document.createElement("span");
     title.className = "project-title";
@@ -58,7 +68,7 @@ function renderProjects() {
     foot.className = "project-foot";
 
     const meta = document.createElement("span");
-    meta.textContent = projectMeta[name] || "Scenario uploaded";
+    meta.textContent = projectMeta[name] || "시나리오 업로드 완료";
 
     const arrow = document.createElement("span");
     arrow.className = "project-arrow";
@@ -77,25 +87,27 @@ function renderProjects() {
 
 function openScenarioDialog(name = "") {
   scenarioText = "";
-  dialogTitle.textContent = name ? name : "New project";
+  dialogTitle.textContent = name ? name : "새 프로젝트";
   projectName.value = name;
   scenarioFile.value = "";
-  scenarioPreview.textContent = "Upload a .txt scenario file.";
+  scenarioPreview.textContent = ".txt 시나리오를 업로드하세요";
   continueButton.disabled = true;
   dialog.showModal();
 }
 
-newProjectButton.addEventListener("click", () => {
-  openScenarioDialog();
-});
+// Guard each binding so the JS still works even if any of these elements
+// gets removed from the markup.
+if (newProjectButton) {
+  newProjectButton.addEventListener("click", () => openScenarioDialog());
+}
 
-newProjectCard.addEventListener("click", () => {
-  openScenarioDialog();
-});
+if (newProjectCard) {
+  newProjectCard.addEventListener("click", () => openScenarioDialog());
+}
 
-dialogCloseButton.addEventListener("click", () => {
-  dialog.close("cancel");
-});
+if (dialogCloseButton) {
+  dialogCloseButton.addEventListener("click", () => dialog.close("cancel"));
+}
 
 scenarioFile.addEventListener("change", async () => {
   const [file] = scenarioFile.files;

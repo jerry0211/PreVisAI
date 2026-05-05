@@ -22,7 +22,6 @@ const uploadDrop = document.querySelector(".upload-drop");
 const scenarioWindow = document.querySelector("#scenarioWindow");
 const scenarioText = document.querySelector("#scenarioText");
 const analyzeButton = document.querySelector("#analyzeButton");
-const generateButton = document.querySelector("#generateButton");
 const outputGrid = document.querySelector("#outputGrid");
 const vectorOutput = document.querySelector("#vectorOutput");
 const promptOutput = document.querySelector("#promptOutput");
@@ -202,7 +201,6 @@ function finishAnalysis() {
   outputGrid.hidden = false;
   progressBar.style.width = "100%";
   setStatus("Video AI package ready", "ready");
-  generateButton.disabled = false;
   analyzeButton.disabled = false;
 }
 
@@ -210,7 +208,6 @@ async function runAnalysis() {
   outputGrid.hidden = true;
   progressBar.style.width = "18%";
   setStatus("Detecting storyboard panels", "busy");
-  generateButton.disabled = true;
   analyzeButton.disabled = true;
 
   try {
@@ -218,7 +215,6 @@ async function runAnalysis() {
   } catch (error) {
     progressBar.style.width = "0%";
     setStatus("Output files could not be loaded");
-    generateButton.disabled = false;
     analyzeButton.disabled = false;
     console.error(error);
     return;
@@ -253,7 +249,6 @@ storyboardFile.addEventListener("change", () => {
 });
 
 analyzeButton.addEventListener("click", runAnalysis);
-generateButton.addEventListener("click", runAnalysis);
 
 document.querySelectorAll("[data-file]").forEach((button) => {
   button.addEventListener("click", async () => {

@@ -25,13 +25,13 @@
       </a>
 
       <nav class="top-nav">
-        <span class="crumb">Project Library</span>
+        <span class="crumb">프로젝트 라이브러리</span>
         <span class="crumb-sep">/</span>
-        <span class="crumb active" id="projectCrumb">Storyboard Workflow</span>
+        <span class="crumb active" id="projectCrumb">스토리보드 워크플로우</span>
       </nav>
 
       <div class="top-actions">
-        <button class="pill ghost" type="button">Help</button>
+        <button class="pill ghost" type="button">지원 요청</button>
         <button class="pill ghost user-pill" type="button" aria-label="User profile">
           <span class="user-dot" aria-hidden="true"></span>
           User
@@ -42,9 +42,9 @@
     <div class="layout">
       <aside class="sidebar" aria-label="projects">
         <div class="sidebar-head">
-          <span class="eyebrow">Projects</span>
+          <span class="eyebrow">프로젝트</span>
           <button class="pill primary small" id="newProjectButton" type="button">
-            <span aria-hidden="true">+</span> New
+            <span aria-hidden="true">+</span> 새 프로젝트
           </button>
         </div>
         <div class="project-list" id="projectListItems"></div>
@@ -52,24 +52,23 @@
 
       <main class="workflow">
         <header class="workflow-head">
-          <span class="eyebrow">Storyboard Workflow</span>
-          <h1 id="projectTitle">Storyboard → Prompt &amp; Vectors</h1>
+          <span class="eyebrow">스토리보드 워크플로우</span>
+          <h1 id="projectTitle">스토리보드 → 프롬프트 &amp; 벡터</h1>
           <p class="workflow-sub">
-            Upload a storyboard panel. PreVisAI matches it against your scenario,
-            extracts motion vectors, and composes a generation-ready video prompt.
+            스토리보드 패널을 업로드하세요. PreVisAI가 시나리오와 비교·분석해 모션 벡터를 추출하고, 생성 가능한 영상 프롬프트를 완성합니다.
           </p>
           <div class="status-pill" id="statusPill">
             <span class="status-dot" aria-hidden="true"></span>
-            <span class="status-text">Ready for Storyboard Image</span>
+            <span class="status-text">스토리보드 업로드 준비 완료</span>
           </div>
         </header>
 
         <section class="card-grid" aria-label="storyboard and scenario">
           <article class="glass-card">
             <header class="card-head">
-              <span class="eyebrow">Storyboard Source</span>
-              <h2>Panel Input</h2>
-              <p>Drop a storyboard image. PNG, JPG, or WebP.</p>
+              <span class="eyebrow">스토리보드 소스</span>
+              <h2>패널 입력</h2>
+              <p>PNG, JPG, 혹은 WebP 형식의 스토리보드 이미지를 드롭하세요.</p>
               <span class="card-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
@@ -88,17 +87,17 @@
               <img id="storyboardPreview" alt="Storyboard image preview" />
               <span class="upload-prompt">
                 <span class="upload-icon" aria-hidden="true">+</span>
-                <strong>Upload storyboard image</strong>
-                <small>PNG, JPG, or WebP — drag &amp; drop supported</small>
+                <strong>스토리보드 이미지 업로드</strong>
+                <small>PNG, JPG, 혹은 WebP — 드래그 &amp; 드롭 가능합니다</small>
               </span>
             </label>
           </article>
 
           <article class="glass-card">
             <header class="card-head">
-              <span class="eyebrow">Scene DNA</span>
-              <h2>Input Scenario</h2>
-              <p>Tone, camera, lighting, and continuity cues for the project.</p>
+              <span class="eyebrow">시나리오 소스</span>
+              <h2>입력된 시나리오</h2>
+              <p>스토리보드에 맞는 부분을 하이라이트합니다.</p>
               <span class="card-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
@@ -111,18 +110,17 @@
               </span>
             </header>
             <div class="scenario-window" id="scenarioWindow" aria-label="input scenario">
-              <pre id="scenarioText">Loading scenario...</pre>
+              <pre id="scenarioText">시나리오 로딩중...</pre>
             </div>
           </article>
         </section>
 
         <section class="process-row" aria-label="storyboard actions">
           <div class="process-info">
-            <span class="eyebrow">Process</span>
-            <h2>Run the pipeline</h2>
+            <span class="eyebrow">프로세스</span>
+            <h2>파이프라인 실행</h2>
             <p>
-              Detect panels, extract motion vectors, and compose a video prompt — in one
-              pass.
+              패널 감지부터 모션 벡터 추출, 영상 프롬프트 생성까지. 한 번에.
             </p>
           </div>
           <div class="process-controls">
@@ -131,10 +129,7 @@
                 <svg class="pill-icon" viewBox="0 0 12 12" aria-hidden="true">
                   <path d="M3 2 L9 6 L3 10 Z" fill="currentColor" />
                 </svg>
-                Analyze Board
-              </button>
-              <button class="pill" id="generateButton" type="button">
-                Export vectors
+                스토리보드 분석
               </button>
             </div>
             <div class="progress-track" aria-hidden="true">
@@ -146,22 +141,22 @@
         <section class="output-grid" id="outputGrid" hidden aria-label="outputs">
           <article class="glass-card output-card">
             <header class="card-head">
-              <span class="eyebrow">Motion</span>
+              <span class="eyebrow">모션</span>
               <h3>scene_vectors.json</h3>
-              <p>Camera, subject, and prop motion vectors with timing.</p>
+              <p>카메라, 피사체, 소품의 움직임 벡터와 타이밍</p>
               <button class="pill small" data-file="vectors" type="button">
-                Download
+                다운로드
               </button>
             </header>
             <pre id="vectorOutput"></pre>
           </article>
           <article class="glass-card output-card">
             <header class="card-head">
-              <span class="eyebrow">Prompt</span>
+              <span class="eyebrow">프롬프트</span>
               <h3>video_prompt.txt</h3>
-              <p>Generation-ready prompt for Sora, Runway, Higgsfield, or Kling.</p>
+              <p>생성에 바로 사용할 수 있는 프롬프트</p>
               <button class="pill small" data-file="prompt" type="button">
-                Download
+                다운로드
               </button>
             </header>
             <pre id="promptOutput"></pre>
