@@ -1,11 +1,137 @@
-Generate a cinematic 9-second sci-fi thriller video from this scene package.
+PreVisAI — 씬 생성 프롬프트
+씬 ID : scene_03 | 샷: FIX·BCU / Track out+Boom down / FIX·CU / FIX·MS / EXT·LS / Track in
+추정 길이 : 약 55초
+텐서 파일 : scene_03_previsai.pt
+================================================================
 
-Scene: Mara Voss crosses the Eos Crown orbital hotel atrium during orbital sunset. The room is a vast curved glass atrium overlooking Earth, with blue service lights on the floor, gold sunlight reflections, and polished glass surfaces that mirror movement.
+[씬 배경]
+장소 : 서울 반지하 주택 — 거실 겸 부엌 통합 공간.
+- 천장이 낮고 창문이 지면에 가깝게 위치. 창으로 도로 보행자 발목 높이가 보임.
+- 거실 바닥 전체에 미접 피자박스 원판이 산더미처럼 쌓임.
+- 기택/충숙/기우/기정 네 식구가 거실에 둘러앉아 피자박스를 접고 있음.
+- 화장실(W.C.)이 우측 후면에 위치. 계단식 제단 위 변기 구조 가시적.
+- 조명 : 낮이나 반지하 특유의 어둑한 자연광. 창을 통해 흐린 외부 빛.
+  소독연기 유입 이후 실내는 뿌연 흰 안개 상태.
+- 분위기 : 처연하고 조용한 가난. 유머와 서글픔이 동시에.
 
-Character: Mara Voss wears a graphite maintenance repair suit and a cracked amber helmet visor. She moves carefully at first, hides behind a sculpture column, then kicks into a low-gravity glide toward the climate-control elevator rail.
+[등장인물 및 객체 — 시각적 특징]
+기택 — 주 피사체
+나이 / 체형 : 40대 후반. 마른 체형. 눈 밑 다크서클.
+의상 : 헐렁한 반팔 홈웨어 셔츠. 어두운 색 바지.
+표정 : 구박받는 와중에도 의도적 '온화한' 미소. 소독연기에 기침을 참는 얼굴이 시뻘게짐.
+주요 행동 : 피자박스 접기 → 연기 속에서도 계속 접기 → 속도 올려보려 어설프게 용씀.
 
-Threat: Sentinel Unit 6 is a matte white hovering security drone with twin red sensor slits and a stabilizer ring. It descends from an upper-right balcony and projects a red scan cone across the floor.
+기우 — 보조 피사체
+나이 / 체형 : 20대 초반. 마른 체형. 들뜬 에너지.
+의상 : 민소매 티셔츠. 트레이닝 바지.
+주요 행동 : 핸드폰 들고 서성임 → 화장실 변기 위에 올라가 신호 찾음 → GIF 영상 재생해서 보여줌.
+소품 : 핸드폰 (수직으로 높이 들어올린 자세).
 
-Camera: Begin with a locked wide mezzanine shot. At 3 seconds, move into a smooth low dolly push. At 6 seconds, add a slight clockwise roll as artificial gravity flickers and Mara glides through the scan gap. Tense, precise, no handheld shake.
+기정 — 보조 피사체
+나이 / 체형 : 10대 후반~20대 초반. 기우 여동생.
+주요 행동 : 피자박스 접기 → 창문 닫으려다 기택 말에 앉음 → 기침.
 
-Visual style: high-end cinematic previs, realistic materials, cool blue and warm gold contrast, crisp reflections, volumetric red scan light, 24 fps, 2.39:1 aspect ratio.
+충숙 — 보조 피사체
+나이 / 체형 : 40대 후반. 기택의 아내.
+주요 행동 : 창밖 바라보기 → 소독연기에 격하게 기침+욕설.
+
+소독방역기 — 추적 객체
+형태 : 외부 도로를 이동하는 방역 차량. 흰 소독 연기를 분사하며 이동.
+움직임 : 화면 좌→우 이동. 흰 구름 연기가 반지하 창문으로 유입.
+
+[.pt 파일 사용 방법]
+로드 (Python):
+──────────────────────────────────────────────
+import pickle
+with open("scene_03_previsai.pt", "rb") as f:
+    bundle = pickle.load(f)
+meta     = bundle["meta"]
+T_pos    = bundle["pose_tensors"]
+M        = bundle["motion_tensors"]
+T_cam    = bundle["camera_tensor"]
+──────────────────────────────────────────────
+
+좌표 체계:
+원점 : 4K 프레임 좌하단 (0, 0, 0)
+x축 : 좌 → 우 (0 – 3840 px)
+y축 : 하 → 상 (0 – 2160 px)
+z축 : 카메라 렌즈면 기준 피사체 깊이 (양의 방향)
+클로즈업 깊이 : 300 – 800 | 중경 : 1500 – 2500 | 원경 : 3000+
+
+포즈 텐서 T_pos — 객체별 키프레임:
+▸ 기택_상체
+  CUT1(BCU): start [ P 2100,  900, 500  ] [ R  0.0°, +3.0°, 0.0° ]
+  CUT4(MS) : start [ P 1600, 1100, 1800 ] [ R -5.0°,  0.0°, 0.0° ]
+             end   [ P 1600, 1050, 1800 ] [ R -8.0°,  0.0°, 0.0° ]  ← 기침 참음
+
+▸ 기우_전신
+  CUT2(start): [ P 1200, 1200, 1600 ] [ R  0.0°, -10.0°, 0.0° ] ← 핸드폰 높이 들고 서있음
+  CUT2(end)  : [ P 2600, 1800, 1400 ] [ R  0.0°,  +5.0°, 0.0° ] ← 화장실 변기 위로 이동
+
+▸ 기우_핸드폰(소품)
+  start: [ P 1150, 1650, 1550 ] [ R -30.0°, -10.0°, 0.0° ] ← 수직 상향
+  end  : [ P 2550, 2100, 1350 ] [ R -45.0°,  +5.0°, 0.0° ]
+
+▸ 기정_상체
+  [ P 2800, 1050, 1700 ] [ R -3.0°, +8.0°, 0.0° ] (비교적 정적)
+
+▸ 충숙_상체
+  CUT4: [ P 3000, 1100, 1700 ] [ R  0.0°, +12.0°, 0.0° ]
+  기침 후: [ R +15.0°, +12.0°, 0.0° ] ← 앞으로 숙이며 기침
+
+▸ 소독방역기
+  start: [ P -200, 400, 4200 ] [ R 0.0°, 0.0°, 0.0° ]
+  end  : [ P 4200, 400, 4200 ] [ R 0.0°, 0.0°, 0.0° ]
+
+▸ 소독연기(파티클)
+  창문 유입 시작: t=18s, x: 0→3840, y: 300–800, z: 500–2000
+  fill_intensity: 0→0.85 (t=18~28s), 유지 0.85 (t=28~55s)
+
+모션 텐서 M:
+t= 0.0s  기택    피자박스 접기   v=(±80, 0, 0) a=(0, 0, 0) ω=(0, 0, ±15°) *교번
+t= 0.0s  기정    피자박스 접기   v=(±70, 0, 0) a=(0, 0, 0) ω=(0, 0, ±12°) *교번
+t= 4.0s  기우    핸드폰 들고 이동 v=(+180, +60, 0) a=(0, 0, 0) ω=(0, -8°, 0)
+t= 8.0s  기우    변기 위 올라감  v=(0, +220, 0) a=(0, -180, 0) ω=(-10°, 0, 0)
+t=18.0s  소독연기 창문 유입 시작  파티클 v=(+120, +30, -80) → 실내 확산
+t=22.0s  충숙    기침+욕설        v=(0, -180, 0) a=(0, +200, 0) ω=(+20°, 0, 0)
+t=28.0s  기택    기침 참으며 접기 v=(±110, 0, 0) a=(0, 0, 0) ω=(0, 0, ±18°) *교번·가속
+t=35.0s  기우    핸드폰 GIF 재생  v=(0, 0, 0) 정적. 핸드폰 화면 활성화.
+t=40.0s  기택    속도 올리려 용씀  v=(±160, ±20, 0) a=(±40, 0, 0) ω=(0, 0, ±25°) *교번·불규칙
+
+카메라 텐서 T_cam:
+CUT1 — Fix · BCU (기택 얼굴+피자박스 로고)
+  [ P 1920, 900, 700 ] [ R 0°, 0°, 0° ] 고정. 렌즈 50mm.
+
+CUT2 — Track out + Zoom out + Boom/Tilt down (기우→식구 전체 reveal)
+  start: [ P 1200, 1800, 1200 ] → end: [ P 1920, 1000, 3200 ]
+  tilt: +8° → -5° (boom down 동반). 렌즈 35mm→24mm. 약 6초.
+
+CUT3 — Fix · CU (핸드폰 화면 — '피자박스 달인' GIF)
+  [ P 2550, 2050, 400 ] [ R 0°, +5°, 0° ] 고정. 렌즈 85mm.
+
+CUT4 — Fix · MS (소독연기 속 네 식구 앙상블)
+  [ P 1920, 1080, 2800 ] [ R 0°, 0°, 0° ] 고정. 렌즈 35mm.
+  연기 유입에 따른 노출 변화 (scattering ↑) 자연스럽게 반영.
+
+CUT5 — EXT · LS (외부 도로 — 소독맨+방역기 이동)
+  [ P 1920, 600, 5500 ] [ R 0°, 0°, 0° ] 고정. 렌즈 28mm.
+  반지하 창문이 프레임 하단에 잘림. 지상 시점.
+
+CUT6/7 — Track in (흰 연기 속 — 방역기 향해 카메라 전진)
+  start: [ P 1920, 700, 4000 ] → end: [ P 1920, 700, 2200 ]
+  v_z = -0.64m/s. 렌즈 24mm. 연기가 카메라를 삼키는 느낌.
+
+[영상 생성 지침]
+1. T_pos["start"] 기준으로 각 피사체 초기화 후 dt=1/24s 순회.
+2. 소독연기 파티클 : 창문 하단에서 수평+상향 확산. 불투명도 점진적 증가.
+   연기 내부에서도 피사체 실루엣은 식별 가능한 수준 유지 (과도한 occlusion 금지).
+3. 색조 : 연기 유입 전 — 반지하 특유의 차갑고 탁한 자연광, 채도 낮음.
+   연기 유입 후 — 흰색 산란으로 전체적으로 플랫하고 뿌연 화면. 대비 감소.
+4. 기택의 '온화한 미소'는 의도적이고 약간 어긋난 것. 기침 참는 얼굴의
+   시뻘건 핏줄과 미소의 병치가 씬의 핵심 정서.
+5. 피자박스 '피자시대' 로고는 CUT1에서 화면을 가득 채우며 등장. 촌스러운 디자인 강조.
+6. 핸드폰 GIF 화면 (CUT3) : 루프 재생. 백인 여자가 빠르게 박스 접는 짤.
+
+================================================================
+Generated by PreVisAI v0.2 | 2026 | scene_03_previsai.pt
+================================================================

@@ -1,8 +1,8 @@
 {
-  "scene_id": "orbital_witness_scene_03_atrium_breach",
+  "scene_id": "parasite_scene_03_fumigation",
   "units": "meters",
   "frame_rate": 24,
-  "duration_seconds": 9,
+  "duration_seconds": 55,
   "coordinate_system": {
     "x": "screen left to right",
     "y": "floor to ceiling",
@@ -18,83 +18,211 @@
     ]
   },
   "environment": {
-    "location": "Eos Crown glass atrium",
+    "location": "semi-basement apartment — open living room and kitchen, Seoul",
     "lighting": [
-      "blue service path",
-      "gold orbital sunset",
-      "red drone scan cone"
+      "dim overcast daylight through low ground-level windows",
+      "flat cold color temperature, low saturation",
+      "post-fumigation: white scatter fog reduces contrast throughout"
     ],
-    "gravity_event": {
-      "start": 5.4,
-      "end": 6.8,
-      "intensity": 0.62
+    "fumigation_event": {
+      "start": 18.0,
+      "end": 55.0,
+      "fill_intensity_max": 0.85,
+      "ramp_duration_seconds": 10.0
     }
   },
   "objects": [
     {
-      "id": "mara_voss",
+      "id": "ki_taek",
       "type": "human",
-      "description": "graphite repair suit, cracked amber visor",
+      "description": "late 40s male, lean, dark circles, loose short-sleeve homewear, deliberate gentle smile masking distress",
       "path": [
-        { "t": 0, "position": [-4.8, 0, 2.4], "rotation": [0, 18, 0] },
-        { "t": 2.2, "position": [-2.2, 0, 1.6], "rotation": [0, 34, 0] },
-        { "t": 4.8, "position": [-1.4, 0, 0.8], "rotation": [0, 82, 0] },
-        { "t": 6.7, "position": [1.2, 1.1, -0.5], "rotation": [8, 101, -12] },
-        { "t": 9, "position": [3.6, 0.35, -1.8], "rotation": [0, 126, 0] }
+        { "t": 0,    "position": [ 0.0,  0.5,  0.5], "rotation": [ 0,   3,  0] },
+        { "t": 18.0, "position": [ 0.0,  0.5,  1.8], "rotation": [-5,   0,  0] },
+        { "t": 28.0, "position": [ 0.0,  0.45, 1.8], "rotation": [-8,   0,  0] },
+        { "t": 40.0, "position": [ 0.0,  0.45, 1.8], "rotation": [-6,   0,  0] },
+        { "t": 55.0, "position": [ 0.0,  0.45, 1.8], "rotation": [-6,   0,  0] }
+      ],
+      "motion_events": [
+        {
+          "t": 0,
+          "action": "folding pizza boxes",
+          "v": [0, 0, 0],
+          "oscillation": { "axis": "rz", "amplitude_degrees": 15, "period_seconds": 0.9 }
+        },
+        {
+          "t": 28.0,
+          "action": "suppressing cough, continuing to fold faster",
+          "oscillation": { "axis": "rz", "amplitude_degrees": 25, "period_seconds": 0.6 }
+        }
       ]
     },
     {
-      "id": "sentinel_unit_6",
-      "type": "security_drone",
-      "description": "matte white drone, red twin sensor slits, stabilizer ring",
+      "id": "ki_woo",
+      "type": "human",
+      "description": "early 20s male, thin, energetic, sleeveless shirt, holding phone high overhead",
       "path": [
-        { "t": 0, "position": [5.1, 5.4, 1.2], "rotation": [0, -42, 0] },
-        { "t": 2.8, "position": [3.7, 3.4, 0.6], "rotation": [0, -78, 0] },
-        { "t": 5.6, "position": [2.4, 2.1, 0.2], "rotation": [0, -96, 0] },
-        { "t": 9, "position": [1.8, 2, -0.3], "rotation": [0, -112, 0] }
+        { "t": 0,    "position": [-1.8,  0.4,  1.6], "rotation": [ 0, -10,  0] },
+        { "t": 4.0,  "position": [-1.8,  0.4,  1.6], "rotation": [ 0, -10,  0] },
+        { "t": 8.0,  "position": [ 0.6,  1.2,  1.4], "rotation": [ 0,   5,  0] },
+        { "t": 12.0, "position": [ 0.6,  1.5,  1.4], "rotation": [-10,  5,  0] },
+        { "t": 35.0, "position": [-1.4,  0.45, 1.8], "rotation": [ 0, -5,   0] },
+        { "t": 55.0, "position": [-1.4,  0.45, 1.8], "rotation": [ 0, -5,   0] }
       ],
-      "emitted_volume": {
-        "id": "red_scan_cone",
-        "shape": "cone",
-        "radius_meters": 3.2,
-        "sweep_degrees": 54,
-        "active_time": [3.1, 7.4]
+      "motion_events": [
+        {
+          "t": 4.0,
+          "action": "walks to bathroom, climbs up onto toilet pedestal",
+          "v": [2.4, 0.8, -0.2],
+          "a": [0, -1.8, 0]
+        },
+        {
+          "t": 35.0,
+          "action": "returns to group, holds out phone showing GIF"
+        }
+      ]
+    },
+    {
+      "id": "ki_woo_phone",
+      "type": "prop",
+      "description": "smartphone, held vertically overhead, screen showing looping GIF of pizza box folding",
+      "path": [
+        { "t": 0,    "position": [-1.8,  1.1,  1.55], "rotation": [-30, -10,  0] },
+        { "t": 8.0,  "position": [ 0.6,  2.0,  1.35], "rotation": [-45,   5,  0] },
+        { "t": 35.0, "position": [-1.5,  0.9,  1.75], "rotation": [ 15,  -5,  0] }
+      ],
+      "screen_event": {
+        "active_at": 35.0,
+        "content": "looping GIF — white woman folding pizza boxes at high speed"
       }
     },
     {
-      "id": "climate_control_elevator_rail",
+      "id": "ki_jung",
+      "type": "human",
+      "description": "late teens female, ki-woo's younger sister, seated, folding boxes",
+      "path": [
+        { "t": 0,    "position": [ 1.8,  0.45, 1.7], "rotation": [-3,  8,  0] },
+        { "t": 18.0, "position": [ 1.8,  0.45, 1.7], "rotation": [-3,  8,  0] },
+        { "t": 23.0, "position": [ 1.8,  0.55, 1.7], "rotation": [-5,  8,  0] },
+        { "t": 55.0, "position": [ 1.8,  0.45, 1.7], "rotation": [-3,  8,  0] }
+      ]
+    },
+    {
+      "id": "chung_sook",
+      "type": "human",
+      "description": "late 40s female, ki-taek's wife, seated, watching window",
+      "path": [
+        { "t": 0,    "position": [ 2.2,  0.5,  1.7], "rotation": [ 0,  12,  0] },
+        { "t": 22.0, "position": [ 2.2,  0.6,  1.7], "rotation": [15,  12,  0] },
+        { "t": 24.0, "position": [ 2.2,  0.5,  1.7], "rotation": [ 0,  12,  0] },
+        { "t": 55.0, "position": [ 2.2,  0.5,  1.7], "rotation": [ 0,  12,  0] }
+      ],
+      "motion_events": [
+        {
+          "t": 22.0,
+          "action": "violent coughing, cursing",
+          "v": [0, -1.8, 0],
+          "a": [0, 2.0, 0]
+        }
+      ]
+    },
+    {
+      "id": "fumigation_truck",
+      "type": "vehicle",
+      "description": "pest control vehicle spraying white chemical fog, street level exterior",
+      "path": [
+        { "t": 15.0, "position": [-4.0,  0.4,  5.5], "rotation": [0,  0, 0] },
+        { "t": 25.0, "position": [ 6.0,  0.4,  5.5], "rotation": [0,  0, 0] }
+      ],
+      "motion_profile": {
+        "velocity_x_meters_per_second": 1.0
+      }
+    },
+    {
+      "id": "fumigation_smoke",
+      "type": "particle_volume",
+      "description": "dense white chemical fog entering through low window",
+      "entry_point": [-2.4, 0.3, 2.2],
+      "spread_vector": [1.2, 0.3, -0.8],
+      "opacity_ramp": {
+        "t_start": 18.0,
+        "t_full": 28.0,
+        "opacity_max": 0.85
+      }
+    },
+    {
+      "id": "pizza_boxes_pile",
+      "type": "prop",
+      "description": "large pile of unfolded pizza box blanks covering most of floor, '피자시대' logo visible",
+      "position": [0, 0.05, 2.0],
+      "scale": [4.8, 0.4, 2.2]
+    },
+    {
+      "id": "toilet_pedestal",
       "type": "set_piece",
-      "position": [3.9, 0.4, -1.9],
-      "scale": [0.3, 2.8, 0.3]
+      "description": "raised step-platform in bathroom with toilet mounted on top — unusual semi-basement plumbing solution",
+      "position": [0.6, 0.6, 1.3],
+      "scale": [0.8, 0.6, 0.8]
     }
   ],
   "camera": [
     {
-      "t": [0, 3.2],
-      "lens_mm": 28,
-      "position": [-5.8, 3.2, 5.6],
-      "target": [-1.7, 0.6, 0.9],
-      "movement": "locked wide mezzanine angle"
+      "cut": 1,
+      "t": [0, 5.0],
+      "lens_mm": 50,
+      "position": [0.0, 0.9, 0.7],
+      "target": [0.0, 0.7, 0.0],
+      "movement": "Fix BCU — ki-taek face and pizza box logo filling frame"
     },
     {
-      "t": [3.2, 6],
-      "lens_mm": 40,
-      "position": [-2.4, 1.1, 3.4],
-      "target": [0.4, 0.7, 0.1],
+      "cut": 2,
+      "t": [5.0, 11.0],
+      "lens_mm_start": 35,
+      "lens_mm_end": 24,
+      "position_start": [-1.8, 1.8, 1.2],
+      "position_end": [0.0, 1.0, 3.2],
+      "target_start": [-1.8, 1.2, 1.6],
+      "target_end":   [ 0.0, 0.5, 1.8],
+      "movement": "Track out + Zoom out + Boom down — reveal full family group and room",
       "movement_vectors": [
-        { "axis": "z", "value_per_second": -0.48 },
-        { "axis": "y", "value_per_second": -0.12 }
+        { "axis": "z", "value_per_second":  0.33 },
+        { "axis": "y", "value_per_second": -0.13 }
       ]
     },
     {
-      "t": [6, 9],
+      "cut": 3,
+      "t": [35.0, 42.0],
+      "lens_mm": 85,
+      "position": [-1.5, 0.9, 1.4],
+      "target": [-1.5, 0.9, 1.75],
+      "movement": "Fix CU — phone screen showing pizza-folding GIF"
+    },
+    {
+      "cut": 4,
+      "t": [18.0, 35.0],
       "lens_mm": 35,
-      "position": [0.2, 0.65, 2],
-      "target": [3.4, 0.5, -1.7],
+      "position": [0.0, 1.08, 2.8],
+      "target": [0.0, 0.5, 1.8],
+      "movement": "Fix MS — full family ensemble in fumigation fog, static wide hold"
+    },
+    {
+      "cut": 5,
+      "t": [15.0, 20.0],
+      "lens_mm": 28,
+      "position": [0.0, 0.6, 5.5],
+      "target": [0.0, 0.4, 4.0],
+      "movement": "EXT LS — exterior street level, fumigation truck passing, semi-basement window visible at bottom of frame"
+    },
+    {
+      "cut": 7,
+      "t": [45.0, 55.0],
+      "lens_mm": 24,
+      "position_start": [0.0, 0.7, 4.0],
+      "position_end":   [0.0, 0.7, 2.2],
+      "target": [0.0, 0.7, 0.0],
+      "movement": "Track in through white fog toward fumigation truck — smoke engulfs camera",
       "movement_vectors": [
-        { "axis": "x", "value_per_second": 0.92 },
-        { "axis": "z", "value_per_second": -0.74 },
-        { "axis": "roll", "value_degrees": -7 }
+        { "axis": "z", "value_per_second": -0.64 }
       ]
     }
   ]
