@@ -99,17 +99,16 @@ header {
   flex-shrink: 0;
 }
 
-.brand-mark {
-  width: 24px;
-  height: 24px;
+.brand-logo {
+  height: 28px;
+  width: auto;
   display: block;
-  filter: drop-shadow(0 0 16px rgba(77, 125, 255, 0.45));
+  filter: drop-shadow(0 0 16px rgba(77, 125, 255, 0.35));
 }
 
-.brand-mark.big {
-  width: 88px;
-  height: 88px;
-  filter: drop-shadow(0 0 32px rgba(77, 125, 255, 0.5));
+.brand-logo.big {
+  height: 96px;
+  filter: drop-shadow(0 0 36px rgba(77, 125, 255, 0.45));
 }
 
 .deck-nav {
@@ -202,6 +201,7 @@ header {
 
 .brand-block {
   display: inline-flex;
+  align-self: flex-start;  /* don't get stretched by the column-flex hero */
   align-items: center;
   gap: 22px;
 }
@@ -399,4 +399,104 @@ header {
     gap: 18px;
     flex-wrap: wrap;
   }
+}
+
+/* ---------- intro overlay ---------- */
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;             /* below the top-bar (z-index 100+ via stacking) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  /* JS overrides --target-* once the brand-block rect is measured */
+  --target-x: 50vw;
+  --target-y: 50vh;
+  --target-w: 470px;
+  /* initial WebP size — large enough that the shrink to brand-block is
+     unmistakable. Capped so it never overflows viewport. WebP is
+     700x452 (ratio 1.549); 78vh*1.549 keeps height < ~78vh. */
+  --intro-w: min(1100px, 92vw, calc(78vh * 1.549));
+}
+
+/* Header sits above the overlay */
+.top-bar {
+  position: relative;
+  z-index: 100;
+}
+
+.intro-overlay-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(720px 520px at 28% 28%, rgba(77, 125, 255, 0.22), transparent 70%),
+    radial-gradient(640px 460px at 92% 92%, rgba(139, 92, 255, 0.22), transparent 70%),
+    var(--bg);
+  transition: opacity 1s ease;
+}
+
+.intro-anim {
+  position: absolute;
+  width: var(--intro-w);
+  height: auto;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 60px rgba(77, 125, 255, 0.3));
+  /* Only animate the geometry — the src swap itself is instant. */
+  transition:
+    width 1.8s cubic-bezier(0.7, 0, 0.2, 1),
+    top 1.8s cubic-bezier(0.7, 0, 0.2, 1),
+    left 1.8s cubic-bezier(0.7, 0, 0.2, 1),
+    filter 1.8s ease;
+}
+
+/* zoom phase — JS swaps the src, then adds .zooming to glide to brand-block */
+.intro-overlay.zooming .intro-overlay-bg {
+  opacity: 0;
+}
+
+.intro-overlay.zooming .intro-anim {
+  width: var(--target-w);
+  top: var(--target-y);
+  left: var(--target-x);
+  filter: drop-shadow(0 0 12px rgba(77, 125, 255, 0.35));
+}
+
+.intro-overlay.done {
+  display: none;
+}
+
+/* Header stays visible the whole time. Body content (everything inside
+   <main>) is held back until the zoom starts. */
+body.intro-active main {
+  opacity: 0;
+}
+
+body main {
+  transition: opacity 0.8s ease 0.2s;
+}
+
+/* the brand-block crossfades in near the end of the zoom, synced with the
+   WebP fading out, so the handoff lands on the static logo */
+.brand-block {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+body.intro-done .brand-block,
+body:not(.intro-active):not(.intro-zooming) .brand-block {
+  opacity: 1;
+}
+
+body.intro-zooming .brand-block {
+  opacity: 1;
+  transition: opacity 0.6s ease 1s;
+}
+
+body.intro-zooming .brand-block {
+  opacity: 1;
+  transition: opacity 0.5s ease 1s; /* fade in near end of zoom */
 }
