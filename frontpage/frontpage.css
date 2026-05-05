@@ -479,24 +479,13 @@ body main {
   transition: opacity 0.8s ease 0.2s;
 }
 
-/* the brand-block crossfades in near the end of the zoom, synced with the
-   WebP fading out, so the handoff lands on the static logo */
+/* The brand-block stays hidden during the intro AND the zoom, then appears
+   instantly the moment the zoom ends (when body gets `.intro-done`). No
+   transition — hard switch from 0 to 1. */
 .brand-block {
   opacity: 0;
-  transition: opacity 0.6s ease;
 }
 
-body.intro-done .brand-block,
-body:not(.intro-active):not(.intro-zooming) .brand-block {
+body.intro-done .brand-block {
   opacity: 1;
-}
-
-body.intro-zooming .brand-block {
-  opacity: 1;
-  transition: opacity 0.6s ease 1s;
-}
-
-body.intro-zooming .brand-block {
-  opacity: 1;
-  transition: opacity 0.5s ease 1s; /* fade in near end of zoom */
 }
