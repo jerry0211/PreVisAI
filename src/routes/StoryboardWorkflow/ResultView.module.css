@@ -1,0 +1,137 @@
+/* ---------- navbar tabs ---------- */
+.tabs {
+  display: flex;
+  gap: var(--space-1);
+  padding: 4px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+}
+
+.tab {
+  padding: 7px 18px;
+  border: 0;
+  background: transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    background var(--dur-fast) var(--ease-standard);
+}
+
+.tab:hover {
+  color: var(--text);
+}
+
+.tabActive {
+  background: var(--accent-wash);
+  color: var(--accent);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ---------- result body ---------- */
+.main {
+  position: relative;
+  z-index: var(--z-content);
+  max-width: var(--shell-max);
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-10) 96px;
+  display: grid;
+  gap: var(--space-8);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.head h1 {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- 프롬프트 tab — scenario + focus scroller ---------- */
+.promptMain {
+  position: relative;
+  z-index: var(--z-content);
+  padding: var(--space-5) var(--space-8) var(--space-6);
+}
+
+.promptLayout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.82fr) 1.5fr;
+  gap: var(--space-6);
+  max-width: var(--shell-max);
+  margin: 0 auto;
+  align-items: start;
+}
+
+@media (max-width: 880px) {
+  .promptLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 에셋보드 tab (scaffold) ---------- */
+.assets {
+  display: grid;
+  gap: var(--space-6);
+  justify-items: center;
+}
+
+.assetThumb {
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.assetEmpty {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: center;
+  text-align: center;
+  width: 100%;
+  padding: var(--space-16) var(--space-8);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  color: var(--text-muted);
+}
+
+.assetEmpty h2 {
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 880px) {
+  .main {
+    padding: var(--space-8) var(--space-5) 64px;
+  }
+
+  .promptGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .tabs {
+    order: 3;
+  }
+}

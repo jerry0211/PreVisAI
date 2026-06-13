@@ -1,0 +1,35 @@
+.brandMini {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--text);
+  font-weight: var(--fw-extrabold);
+  font-size: var(--fs-base);
+  letter-spacing: var(--tracking-snug);
+  flex-shrink: 0;
+}
+
+.mark {
+  height: 22px;
+  width: 22px;
+}
+
+.deckTag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.tagSep {
+  color: var(--text-faint);
+  font-weight: var(--fw-semibold);
+}
+
+.logo {
+  height: 28px;
+  width: auto;
+}
+
+.logoBig {
+  height: 96px;
+}

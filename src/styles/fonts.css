@@ -1,0 +1,41 @@
+/* =============================================================================
+   Fonts
+   Self-hosted Pretendard (Korean + Latin UI face) plus Google-hosted Inter and
+   JetBrains Mono. Font *families* are exposed as tokens in tokens.css — never
+   hard-code a family name in component CSS; use var(--font-sans) etc.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/assets/Font/Pretendard/Pretendard-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/assets/Font/Pretendard/Pretendard-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/assets/Font/Pretendard/Pretendard-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src: url('/assets/Font/Pretendard/Pretendard-ExtraBold.subset.woff2')
+    format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}

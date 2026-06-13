@@ -1,0 +1,75 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 11px 18px;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    border-color var(--dur-fast) var(--ease-standard),
+    background var(--dur-fast) var(--ease-standard),
+    box-shadow var(--dur-fast) var(--ease-standard),
+    transform var(--dur-fast) var(--ease-standard),
+    opacity var(--dur-fast) var(--ease-standard);
+}
+
+.pill:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-3);
+}
+
+.pill:active {
+  transform: translateY(1px);
+}
+
+.pill:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Variants ------------------------------------------------------------------ */
+/* Primary = LTX-style solid cyan CTA with dark ink text. */
+.primary {
+  color: var(--accent-contrast);
+  background: var(--accent);
+  border-color: transparent;
+  font-weight: var(--fw-bold);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--accent-soft);
+  border-color: transparent;
+  box-shadow: var(--glow-accent-strong);
+}
+
+/* Ghost = quiet, transparent until hovered. */
+.ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+
+.ghost:hover {
+  background: var(--surface-1);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+/* Sizes --------------------------------------------------------------------- */
+.small {
+  padding: 7px 13px;
+  font-size: var(--fs-xs);
+}
+
+.big {
+  padding: 14px 24px;
+  font-size: var(--fs-md);
+}

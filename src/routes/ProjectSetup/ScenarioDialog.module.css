@@ -1,0 +1,174 @@
+.dialog {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--text);
+  width: min(620px, calc(100% - 32px));
+  max-height: calc(100vh - 64px);
+}
+
+.dialog::backdrop {
+  background: rgba(2, 3, 8, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.form {
+  position: relative;
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--space-8);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-strong);
+  background: var(--color-bg-soft);
+  box-shadow: var(--shadow-pop);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.head h2 {
+  margin-top: var(--space-1);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.015em;
+}
+
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 0 14px var(--accent-glow);
+}
+
+.close {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  color: var(--text-muted);
+  font-size: var(--fs-lg);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease;
+}
+
+.close:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.fieldLabel {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.field input[type='text'] {
+  font: inherit;
+  font-size: var(--fs-base);
+  padding: 14px 16px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
+  transition:
+    border-color var(--dur-fast) ease,
+    background var(--dur-fast) ease;
+}
+
+.field input[type='text']::placeholder {
+  color: var(--text-faint);
+}
+
+.field input[type='text']:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgb(var(--hue-accent) / 0.06);
+}
+
+.fileControl {
+  position: relative;
+  display: grid;
+  gap: var(--space-1);
+  padding: 18px;
+  background: var(--surface-1);
+  border: 1px dashed var(--border-strong);
+  border-radius: 14px;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) ease,
+    background var(--dur-fast) ease;
+}
+
+.fileControl:hover {
+  border-color: var(--accent);
+  background: rgb(var(--hue-accent) / 0.05);
+}
+
+.fileControl input[type='file'] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.fileControlLabel {
+  font-size: 14px;
+  font-weight: var(--fw-medium);
+  color: var(--text);
+}
+
+.fileControlHint {
+  font-size: var(--fs-xs);
+  color: var(--text-dim);
+}
+
+.previewCard {
+  display: grid;
+  gap: var(--space-2);
+  padding: 14px 16px 16px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.previewLabel {
+  font-size: 10px;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.preview {
+  margin: 0;
+  max-height: 220px;
+  overflow: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-muted);
+  white-space: pre-wrap;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-1);
+}

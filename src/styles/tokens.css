@@ -1,0 +1,158 @@
+/* =============================================================================
+   DESIGN TOKENS — single source of truth for the PreVisAI look & feel.
+   -----------------------------------------------------------------------------
+   This is THE file to edit when you want to re-theme the whole site. Component
+   CSS Modules must only reference these `--token` variables, never raw hex /
+   px values.
+
+   Palette: modeled on LTX Studio — a professional, near-monochrome dark canvas
+   (deep neutral grays, not blue-tinted), crisp white type, generous negative
+   space, and a single vibrant CYAN / TURQUOISE accent reserved for CTAs, links,
+   and active states. Flat and minimal: hairline borders, restrained glow, no
+   heavy gradient edges.
+
+   Layers, top to bottom:
+     1. Primitive palette  — raw hues (rename a hue once, it cascades)
+     2. Semantic tokens    — surfaces / text / borders / accents by *role*
+     3. Typography         — families, sizes, weights, tracking
+     4. Space / radius      — spacing scale, corner radii
+     5. Elevation / glow    — shadows and the restrained accent glow
+     6. Motion             — durations + easing curves
+     7. Layout             — shell dimensions
+   Change `--hue-accent` to re-skin every interactive accent at once.
+   ========================================================================== */
+
+:root {
+  /* 1 — PRIMITIVE PALETTE ---------------------------------------------------- */
+  --hue-ink-900: #0a0c0f; /* deepest canvas */
+  --hue-ink-800: #0f1217; /* raised canvas */
+  --hue-ink-700: #161a21; /* card base */
+  --hue-ink-600: #1d222b; /* elevated card / pill */
+
+  --hue-accent: 34 211 238; /* #22D3EE cyan — primary brand (R G B) */
+  --hue-accent-2: 56 189 248; /* #38BDF8 sky-blue — secondary */
+  --hue-accent-3: 165 243 252; /* #A5F3FC light cyan — soft highlight */
+
+  --hue-white: 255 255 255;
+
+  /* 2 — SEMANTIC TOKENS ------------------------------------------------------ */
+  /* Surfaces */
+  --color-bg: var(--hue-ink-900);
+  --color-bg-soft: var(--hue-ink-800);
+  --surface-1: rgb(var(--hue-white) / 0.03);
+  --surface-2: rgb(var(--hue-white) / 0.05);
+  --surface-3: rgb(var(--hue-white) / 0.07);
+  --surface-glass: rgba(12, 15, 20, 0.82);
+  --surface-pill: var(--hue-ink-600);
+
+  /* Text */
+  --text: rgb(var(--hue-white) / 1);
+  --text-muted: rgb(var(--hue-white) / 0.6);
+  --text-dim: rgb(var(--hue-white) / 0.4);
+  --text-faint: rgb(var(--hue-white) / 0.24);
+
+  /* Borders */
+  --border: rgb(var(--hue-white) / 0.09);
+  --border-strong: rgb(var(--hue-white) / 0.16);
+  --border-faint: rgb(var(--hue-white) / 0.05);
+
+  /* Accents (role-based) */
+  --accent: rgb(var(--hue-accent));
+  --accent-2: rgb(var(--hue-accent-2));
+  --accent-soft: rgb(var(--hue-accent-3));
+  --accent-contrast: #042027; /* dark ink text on solid cyan buttons */
+  --accent-glow: rgb(var(--hue-accent) / 0.3);
+  --accent-glow-2: rgb(var(--hue-accent-2) / 0.3);
+  --accent-wash: rgb(var(--hue-accent) / 0.1);
+  --accent-line: rgb(var(--hue-accent) / 0.4);
+  --accent-gradient: linear-gradient(
+    120deg,
+    rgb(var(--hue-accent-2)) 0%,
+    rgb(var(--hue-accent)) 100%
+  );
+
+  /* 3 — TYPOGRAPHY ----------------------------------------------------------- */
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Inter',
+    system-ui, sans-serif;
+  --font-display: 'Inter', 'Pretendard', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo,
+    monospace;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+  --fw-extrabold: 800;
+  --fw-black: 900;
+
+  --fs-eyebrow: 11px;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: 15px;
+  --fs-md: 16px;
+  --fs-lg: 20px;
+  --fs-xl: 24px;
+  --fs-2xl: 32px;
+  --fs-display: clamp(56px, 9vw, 124px);
+  --fs-display-sm: clamp(40px, 6vw, 76px);
+
+  --tracking-tight: -0.03em;
+  --tracking-snug: -0.01em;
+  --tracking-wide: 0.02em;
+  --tracking-eyebrow: 0.2em;
+
+  /* 4 — SPACE & RADIUS ------------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 26px;
+  --radius-pill: 999px;
+
+  /* 5 — ELEVATION & GLOW ----------------------------------------------------- */
+  --shadow-card: 0 18px 48px -28px rgba(0, 0, 0, 0.7);
+  --shadow-pop: 0 24px 60px -24px rgba(0, 0, 0, 0.75);
+  --glow-accent: 0 0 24px -8px var(--accent-glow);
+  --glow-accent-strong: 0 6px 28px -10px var(--accent-glow);
+
+  /* Subtle ambient wash — restrained, neutral, far from a neon hero glow. */
+  --page-glow:
+    radial-gradient(
+      900px 600px at 82% -12%,
+      rgb(var(--hue-accent) / 0.06),
+      transparent 70%
+    ),
+    radial-gradient(
+      720px 520px at -5% 108%,
+      rgb(var(--hue-accent-2) / 0.05),
+      transparent 70%
+    );
+
+  /* 6 — MOTION --------------------------------------------------------------- */
+  --dur-fast: 0.18s;
+  --dur-base: 0.3s;
+  --dur-slow: 0.8s;
+  --dur-intro-zoom: 1.8s;
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.7, 0, 0.2, 1);
+
+  /* 7 — LAYOUT --------------------------------------------------------------- */
+  --shell-max: 1280px;
+  --header-h: 65px;
+  --z-bg: 0;
+  --z-content: 1;
+  --z-header: 100;
+  --z-overlay: 90;
+  --z-dialog: 200;
+}

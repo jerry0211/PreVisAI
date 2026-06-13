@@ -1,0 +1,30 @@
+.panel {
+  position: relative;
+  width: min(480px, 100%);
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-10);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--color-bg-soft);
+  box-shadow: var(--shadow-pop);
+  overflow: hidden;
+  animation: panelIn 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 560px) {
+  .panel {
+    padding: var(--space-8);
+  }
+}

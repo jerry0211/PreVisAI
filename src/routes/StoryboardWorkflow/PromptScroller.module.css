@@ -1,0 +1,145 @@
+.scroller {
+  position: relative;
+  height: 74vh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  /* Top/bottom room so the first and last rows can settle in the center. */
+  padding-block: 12vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  scrollbar-width: none;
+  /* Soft fade at the top/bottom edges to sell the "receding behind" depth. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 16%,
+    #000 84%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent,
+    #000 16%,
+    #000 84%,
+    transparent
+  );
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
+.row {
+  flex: 0 0 auto;
+  width: min(960px, 94%);
+  height: 50vh;
+  scroll-snap-align: center;
+  display: flex;
+  /* Negative margins overlap neighbors so they tuck behind the active row. */
+  margin-block: -4vh;
+  position: relative;
+  z-index: 1;
+  /* 3D space so the current card can pop toward the viewer. */
+  perspective: 1400px;
+}
+
+.rowActive {
+  z-index: 5;
+}
+
+.card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 44% 1fr;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--color-bg-soft);
+  overflow: hidden;
+  transform-origin: center;
+  /* Default (non-current) rows: smaller, faded, pushed back. */
+  transform: translateZ(-90px) scale(0.9);
+  opacity: 0.3;
+  z-index: 1;
+  transition:
+    transform 0.45s var(--ease-standard),
+    opacity 0.45s var(--ease-standard),
+    box-shadow 0.45s var(--ease-standard),
+    border-color 0.45s ease;
+  will-change: transform, opacity;
+}
+
+/* Current row pops slightly forward, lifts, and casts a deeper shadow. */
+.rowActive .card {
+  transform: translateZ(60px) translateY(-1vh) scale(1.01);
+  opacity: 1;
+  border-color: var(--accent-line);
+  box-shadow:
+    0 40px 90px -34px rgba(0, 0, 0, 0.85),
+    var(--glow-accent);
+}
+
+/* ---------- left: storyboard crop ---------- */
+.crop {
+  background-color: var(--hue-ink-700);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-right: 1px solid var(--border);
+  min-width: 0;
+  min-height: 0;
+}
+
+.cropPlaceholder {
+  display: grid;
+  place-items: center;
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+}
+
+/* ---------- right: combined JSON ---------- */
+.body {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  min-width: 0;
+}
+
+.bodyHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+
+.json {
+  margin: 0;
+  overflow: auto;
+  padding: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  white-space: pre;
+}
+
+@media (max-width: 720px) {
+  .card {
+    grid-template-columns: 1fr;
+    grid-template-rows: 38% 1fr;
+  }
+
+  .crop {
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+}

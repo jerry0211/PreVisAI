@@ -1,0 +1,236 @@
+.page {
+  position: relative;
+  z-index: var(--z-content);
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: var(--space-16) var(--space-6);
+}
+
+/* ---------- brand block inside card ---------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.brandMark {
+  width: 56px;
+  height: 56px;
+  filter: drop-shadow(0 0 24px var(--accent-glow));
+}
+
+.brandWord {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* ---------- heads / typography ---------- */
+.eyebrow {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 0 18px var(--accent-glow);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.head h1 {
+  font-size: 30px;
+  font-weight: var(--fw-semibold);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.sub {
+  color: var(--text-muted);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+/* ---------- form ---------- */
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.fieldLabel {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.field input {
+  font: inherit;
+  font-size: var(--fs-base);
+  padding: 14px 16px;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text);
+  transition:
+    border-color var(--dur-fast) ease,
+    background var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease;
+}
+
+.field input::placeholder {
+  color: var(--text-faint);
+}
+
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgb(var(--hue-accent) / 0.06);
+  box-shadow: 0 0 0 4px rgb(var(--hue-accent) / 0.12);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.actions {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.signInButton {
+  width: 100%;
+  position: relative;
+}
+
+.hint {
+  font-size: 12.5px;
+  color: #ff8c8c;
+  text-align: center;
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.check input {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 5px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-1);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.check input:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.check input:checked::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: translateY(-1px) rotate(-45deg);
+}
+
+.link {
+  color: var(--text-muted);
+  transition: color 0.15s ease;
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+/* sign-in spinner */
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgb(var(--hue-white) / 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- divider / providers ---------- */
+.divider {
+  position: relative;
+  text-align: center;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 28px);
+  height: 1px;
+  background: var(--border);
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+.providers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.providerIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.foot {
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+@media (max-width: 560px) {
+  .providers {
+    grid-template-columns: 1fr;
+  }
+}

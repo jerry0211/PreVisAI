@@ -1,0 +1,30 @@
+.page {
+  position: relative;
+  z-index: var(--z-content);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+  text-align: center;
+  padding: var(--space-16) var(--space-6);
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xl);
+  color: var(--accent);
+  letter-spacing: var(--tracking-wide);
+}
+
+.title {
+  font-size: var(--fs-2xl);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: var(--tracking-snug);
+}
+
+.sub {
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+}

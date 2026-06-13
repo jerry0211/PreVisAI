@@ -1,0 +1,224 @@
+/* ---------- page ---------- */
+.page {
+  position: relative;
+  z-index: var(--z-content);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-14) var(--space-16) var(--space-12);
+  max-width: var(--shell-max);
+  width: 100%;
+  margin: 0 auto;
+  transition: opacity var(--dur-slow) ease 0.2s;
+}
+
+/* main contents are held back until the zoom starts */
+.contentHidden {
+  opacity: 0;
+}
+
+/* ---------- hero ---------- */
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+}
+
+.brandBlock {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 22px;
+  /* hidden during intro + zoom, hard-revealed when done (no transition) */
+  opacity: 0;
+}
+
+.brandVisible {
+  opacity: 1;
+}
+
+.heroDivider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-strong) 12%,
+    var(--border-strong) 60%,
+    transparent
+  );
+  opacity: 0.55;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-12);
+  align-items: end;
+  flex: 1;
+}
+
+.heroHeadline h1 {
+  font-size: var(--fs-display);
+  line-height: 0.94;
+  letter-spacing: var(--tracking-tight);
+  font-weight: var(--fw-extrabold);
+}
+
+.accentShot {
+  font-weight: var(--fw-black);
+  color: var(--accent);
+}
+
+.heroSub {
+  margin-top: var(--space-8);
+  max-width: 560px;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semibold);
+  line-height: 1.55;
+  color: var(--text-muted);
+}
+
+.heroSub strong {
+  color: var(--text);
+  font-weight: var(--fw-extrabold);
+}
+
+/* ---------- hero foot ---------- */
+.heroFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+.supportedLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.modelList {
+  display: flex;
+  gap: 36px;
+}
+
+.modelList li {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-muted);
+}
+
+/* ---------- intro overlay ---------- */
+.introOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  --target-x: 50vw;
+  --target-y: 50vh;
+  --target-w: 470px;
+  /* WebP is 700x452 (ratio 1.549); cap so it never overflows the viewport */
+  --intro-w: min(1100px, 92vw, calc(78vh * 1.549));
+}
+
+.introBg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      720px 520px at 28% 28%,
+      rgb(var(--hue-accent-2) / 0.08),
+      transparent 70%
+    ),
+    radial-gradient(
+      640px 460px at 92% 92%,
+      rgb(var(--hue-accent) / 0.08),
+      transparent 70%
+    ),
+    var(--color-bg);
+  transition: opacity 1s ease;
+}
+
+.introAnim {
+  position: absolute;
+  width: var(--intro-w);
+  height: auto;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  transition:
+    width var(--dur-intro-zoom) var(--ease-emphasized),
+    top var(--dur-intro-zoom) var(--ease-emphasized),
+    left var(--dur-intro-zoom) var(--ease-emphasized),
+    filter var(--dur-intro-zoom) ease;
+}
+
+.zooming .introBg {
+  opacity: 0;
+}
+
+.zooming .introAnim {
+  width: var(--target-w);
+  top: var(--target-y);
+  left: var(--target-x);
+  filter: drop-shadow(0 0 12px var(--accent-glow));
+}
+
+.done {
+  display: none;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1080px) {
+  .page {
+    padding: var(--space-12) var(--space-8);
+  }
+}
+
+@media (max-width: 880px) {
+  .page {
+    padding: var(--space-10) var(--space-5);
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: var(--space-8);
+  }
+
+  .heroHeadline h1 {
+    font-size: var(--fs-display-sm);
+  }
+
+  .heroFoot {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .modelList {
+    gap: var(--space-5);
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,24 @@
+.topBar {
+  position: relative;
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: 18px var(--space-10);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.start {
+  justify-content: flex-start;
+}
+
+@media (max-width: 880px) {
+  .topBar {
+    padding: 14px var(--space-5);
+    gap: var(--space-3);
+  }
+}
