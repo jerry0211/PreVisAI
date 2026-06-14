@@ -24,14 +24,14 @@
 
 :root {
   /* 1 — PRIMITIVE PALETTE ---------------------------------------------------- */
-  --hue-ink-900: #0a0c0f; /* deepest canvas */
-  --hue-ink-800: #0f1217; /* raised canvas */
-  --hue-ink-700: #161a21; /* card base */
-  --hue-ink-600: #1d222b; /* elevated card / pill */
+  --hue-ink-900: #161618; /* background */
+  --hue-ink-800: #151215; /* panel / surface */
+  --hue-ink-700: #1e1a1b; /* card / object — warm dark gray */
+  --hue-ink-600: #2a2425; /* elevated card / pill (hover) */
 
-  --hue-accent: 34 211 238; /* #22D3EE cyan — primary brand (R G B) */
-  --hue-accent-2: 56 189 248; /* #38BDF8 sky-blue — secondary */
-  --hue-accent-3: 165 243 252; /* #A5F3FC light cyan — soft highlight */
+  --hue-accent: 248 54 64; /* #F83640 Imperial red — accent / CTA (R G B) */
+  --hue-accent-2: 215 42 51; /* #D72A33 deep red — secondary */
+  --hue-accent-3: 255 106 114; /* #FF6A72 light red — hover highlight */
 
   --hue-white: 255 255 255;
 
@@ -39,11 +39,13 @@
   /* Surfaces */
   --color-bg: var(--hue-ink-900);
   --color-bg-soft: var(--hue-ink-800);
-  --surface-1: rgb(var(--hue-white) / 0.03);
-  --surface-2: rgb(var(--hue-white) / 0.05);
-  --surface-3: rgb(var(--hue-white) / 0.07);
-  --surface-glass: rgba(12, 15, 20, 0.82);
-  --surface-pill: var(--hue-ink-600);
+  /* Opaque surfaces — warm red-black, no transparency anywhere. */
+  --surface-1: #0d0a0b;
+  --surface-2: #181314;
+  --surface-3: #221b1c;
+  --surface-glass: #080506;
+  --surface-pill: var(--hue-ink-700);
+  --surface-inset: #000000;
 
   /* Text */
   --text: rgb(var(--hue-white) / 1);
@@ -60,16 +62,17 @@
   --accent: rgb(var(--hue-accent));
   --accent-2: rgb(var(--hue-accent-2));
   --accent-soft: rgb(var(--hue-accent-3));
-  --accent-contrast: #042027; /* dark ink text on solid cyan buttons */
+  --accent-contrast: #ffffff; /* white text on solid red CTA buttons */
   --accent-glow: rgb(var(--hue-accent) / 0.3);
   --accent-glow-2: rgb(var(--hue-accent-2) / 0.3);
-  --accent-wash: rgb(var(--hue-accent) / 0.1);
-  --accent-line: rgb(var(--hue-accent) / 0.4);
-  --accent-gradient: linear-gradient(
-    120deg,
-    rgb(var(--hue-accent-2)) 0%,
-    rgb(var(--hue-accent)) 100%
-  );
+  --accent-wash: #2a1416; /* opaque red-tinted fill */
+  --accent-line: rgb(var(--hue-accent) / 0.55);
+  /* Opaque red-tinted fill for selected/active buttons (no transparency). */
+  --surface-accent: #2a1416;
+
+  /* Opaque button surfaces (no transparency). */
+  --btn: var(--hue-ink-700);
+  --btn-hover: var(--hue-ink-600);
 
   /* 3 — TYPOGRAPHY ----------------------------------------------------------- */
   --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Inter',
@@ -126,18 +129,8 @@
   --glow-accent: 0 0 24px -8px var(--accent-glow);
   --glow-accent-strong: 0 6px 28px -10px var(--accent-glow);
 
-  /* Subtle ambient wash — restrained, neutral, far from a neon hero glow. */
-  --page-glow:
-    radial-gradient(
-      900px 600px at 82% -12%,
-      rgb(var(--hue-accent) / 0.06),
-      transparent 70%
-    ),
-    radial-gradient(
-      720px 520px at -5% 108%,
-      rgb(var(--hue-accent-2) / 0.05),
-      transparent 70%
-    );
+  /* Flat canvas — no ambient gradient wash. */
+  --page-glow: none;
 
   /* 6 — MOTION --------------------------------------------------------------- */
   --dur-fast: 0.18s;

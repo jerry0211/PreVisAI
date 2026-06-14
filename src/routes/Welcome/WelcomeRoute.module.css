@@ -23,17 +23,9 @@
 
 .orbRing {
   position: absolute;
-  inset: 0;
+  inset: 6px;
   border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    rgb(var(--hue-accent-2) / 0),
-    rgb(var(--hue-accent-2) / 0.6),
-    rgb(var(--hue-accent) / 0.7),
-    rgb(var(--hue-accent-2) / 0)
-  );
-  filter: blur(8px);
-  animation: orbSpin 6s linear infinite;
+  border: 1px solid var(--accent-line);
 }
 
 .orbCore {
@@ -41,21 +33,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 30% 30%,
-    #fff,
-    var(--accent-2) 50%,
-    var(--accent)
-  );
-  box-shadow:
-    0 0 40px var(--accent-glow),
-    inset 0 0 20px rgb(var(--hue-white) / 0.4);
-}
-
-@keyframes orbSpin {
-  to {
-    transform: rotate(360deg);
-  }
+  background: var(--accent);
 }
 
 /* ---------- head ---------- */
@@ -63,8 +41,7 @@
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--accent);
-  text-shadow: 0 0 18px var(--accent-glow);
+  color: var(--text-dim);
 }
 
 .head {
@@ -123,7 +100,7 @@
   width: 100%;
   height: 3px;
   border-radius: var(--radius-pill);
-  background: rgb(var(--hue-white) / 0.06);
+  background: var(--surface-3);
   overflow: hidden;
 }
 
@@ -131,8 +108,7 @@
   display: block;
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 12px var(--accent-glow);
+  background: var(--accent);
   animation: redirectFill 800ms linear forwards;
 }
 

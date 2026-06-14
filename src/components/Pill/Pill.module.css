@@ -7,7 +7,7 @@
   font-size: var(--fs-sm);
   font-weight: var(--fw-semibold);
   color: var(--text);
-  background: var(--surface-2);
+  background: var(--btn);
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
   cursor: pointer;
@@ -22,7 +22,7 @@
 
 .pill:hover {
   border-color: var(--border-strong);
-  background: var(--surface-3);
+  background: var(--btn-hover);
 }
 
 .pill:active {
@@ -58,7 +58,7 @@
 }
 
 .ghost:hover {
-  background: var(--surface-1);
+  background: var(--btn);
   border-color: var(--border-strong);
   color: var(--text);
 }

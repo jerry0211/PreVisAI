@@ -1,10 +1,6 @@
 /* ---------- aurora backdrop (layered over the shared AppBackground) ---------- */
 .aurora {
-  position: fixed;
-  inset: 0;
-  z-index: var(--z-bg);
-  pointer-events: none;
-  overflow: hidden;
+  display: none;
 }
 
 .aurora span {
@@ -86,8 +82,7 @@
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--accent);
-  text-shadow: 0 0 18px var(--accent-glow);
+  color: var(--text-dim);
 }
 
 /* ---------- hero ---------- */
@@ -129,14 +124,6 @@
   overflow: hidden;
   border-block: 1px solid var(--border);
   padding: var(--space-5) 0;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 12%,
-    #000 88%,
-    transparent
-  );
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
 .marqueeTrack {
@@ -206,18 +193,7 @@
 
 .thumb {
   aspect-ratio: 16 / 9;
-  background:
-    radial-gradient(
-      120% 120% at 20% 0%,
-      rgb(var(--hue-accent) / 0.45),
-      transparent 60%
-    ),
-    radial-gradient(
-      120% 120% at 100% 100%,
-      rgb(var(--hue-accent-2) / 0.4),
-      transparent 55%
-    ),
-    var(--hue-ink-700);
+  background: var(--hue-ink-700);
 }
 
 .frameMeta {
@@ -272,11 +248,7 @@
   padding: var(--space-16) var(--space-8);
   border-radius: var(--radius-xl);
   border: 1px solid var(--border);
-  background: linear-gradient(
-    180deg,
-    rgb(var(--hue-accent) / 0.08),
-    transparent
-  );
+  background: var(--accent-wash);
 }
 
 .cta h2 {

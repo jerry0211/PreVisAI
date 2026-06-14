@@ -41,13 +41,7 @@
 .heroDivider {
   height: 1px;
   width: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--border-strong) 12%,
-    var(--border-strong) 60%,
-    transparent
-  );
+  background: var(--border-strong);
   opacity: 0.55;
 }
 
@@ -145,18 +139,7 @@
 .introBg {
   position: absolute;
   inset: 0;
-  background:
-    radial-gradient(
-      720px 520px at 28% 28%,
-      rgb(var(--hue-accent-2) / 0.08),
-      transparent 70%
-    ),
-    radial-gradient(
-      640px 460px at 92% 92%,
-      rgb(var(--hue-accent) / 0.08),
-      transparent 70%
-    ),
-    var(--color-bg);
+  background: var(--color-bg);
   transition: opacity 1s ease;
 }
 

@@ -58,8 +58,7 @@
   font-size: var(--fs-eyebrow);
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
-  color: var(--accent);
-  text-shadow: 0 0 16px var(--accent-glow);
+  color: var(--text-dim);
 }
 
 /* ---------- layout ---------- */
@@ -82,11 +81,7 @@
   gap: var(--space-4);
   align-content: start;
   overflow: auto;
-  background: linear-gradient(
-    180deg,
-    rgb(var(--hue-white) / 0.015),
-    transparent 60%
-  );
+  background: transparent;
 }
 
 .sidebarHead {
@@ -132,13 +127,13 @@
 }
 
 .projectItem:hover {
-  background: var(--surface-1);
+  background: var(--btn);
   color: var(--text);
   border-color: var(--border);
 }
 
 .projectItemActive {
-  background: var(--accent-wash);
+  background: var(--surface-accent);
   border-color: rgb(var(--hue-accent) / 0.4);
   color: var(--text);
 }
@@ -297,11 +292,7 @@
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-md);
   border: 1px dashed var(--border-strong);
-  background: linear-gradient(
-    180deg,
-    rgb(var(--hue-white) / 0.025),
-    rgb(var(--hue-white) / 0.008)
-  );
+  background: var(--btn);
   text-align: center;
   cursor: pointer;
   overflow: hidden;
@@ -312,7 +303,7 @@
 
 .uploadDrop:hover {
   border-color: var(--accent);
-  background: var(--accent-wash);
+  background: var(--btn-hover);
 }
 
 .uploadDrop input {
@@ -373,7 +364,7 @@
   aspect-ratio: 4 / 3;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--surface-inset);
   overflow: hidden;
 }
 
@@ -391,11 +382,7 @@
 }
 
 .scenarioMatch {
-  background: linear-gradient(
-    180deg,
-    rgb(var(--hue-accent) / 0.28),
-    rgb(var(--hue-accent-2) / 0.18)
-  );
+  background: var(--accent-wash);
   color: var(--text);
   padding: 1px 4px;
   border-radius: 4px;
@@ -425,11 +412,7 @@
   padding: 28px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border);
-  background: linear-gradient(
-    180deg,
-    rgb(var(--hue-white) / 0.035),
-    rgb(var(--hue-white) / 0.01)
-  );
+  background: var(--surface-1);
 }
 
 .processInfo {
@@ -474,7 +457,7 @@
   min-width: 280px;
   height: 4px;
   border-radius: var(--radius-pill);
-  background: rgb(var(--hue-white) / 0.06);
+  background: var(--surface-3);
   overflow: hidden;
 }
 
@@ -482,8 +465,7 @@
   display: block;
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  box-shadow: 0 0 12px var(--accent-glow);
+  background: var(--accent);
   transition: width 0.45s ease;
 }
 
@@ -526,7 +508,7 @@
   padding: 18px;
   border-radius: var(--radius-md);
   border: 1px solid var(--border);
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--surface-inset);
   font-family: var(--font-mono);
   font-size: 12.5px;
   line-height: 1.6;

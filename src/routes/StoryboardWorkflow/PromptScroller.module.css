@@ -9,21 +9,6 @@
   flex-direction: column;
   align-items: center;
   scrollbar-width: none;
-  /* Soft fade at the top/bottom edges to sell the "receding behind" depth. */
-  -webkit-mask-image: linear-gradient(
-    180deg,
-    transparent,
-    #000 16%,
-    #000 84%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    180deg,
-    transparent,
-    #000 16%,
-    #000 84%,
-    transparent
-  );
 }
 
 .scroller::-webkit-scrollbar {

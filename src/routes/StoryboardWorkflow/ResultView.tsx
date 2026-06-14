@@ -4,6 +4,7 @@ import { BrandMini } from '@/components/Brand/BrandMini';
 import { Pill } from '@/components/Pill/Pill';
 import { PromptScroller } from './PromptScroller';
 import { ScenarioPanel } from './ScenarioPanel';
+import { AssetBoard } from './AssetBoard';
 import { buildPlaceholderPanels } from './scenes';
 import styles from './ResultView.module.css';
 
@@ -76,10 +77,10 @@ export function ResultView({
       ) : (
         <main className={styles.main}>
           <header className={styles.head}>
-            <span className={styles.eyebrow}>생성 완료</span>
+            <span className={styles.eyebrow}>에셋보드</span>
             <h1>{projectName}</h1>
           </header>
-          <AssetsTab storyboardPreview={storyboardPreview} />
+          <AssetBoard />
         </main>
       )}
     </>
@@ -124,25 +125,5 @@ function PromptTab({ storyboardPreview }: { storyboardPreview: string | null }) 
         />
       </div>
     </main>
-  );
-}
-
-/* ---------- 에셋보드 tab (scaffold) ---------- */
-function AssetsTab({ storyboardPreview }: { storyboardPreview: string | null }) {
-  return (
-    <section className={styles.assets} aria-label="asset board">
-      {storyboardPreview && (
-        <img
-          className={styles.assetThumb}
-          src={storyboardPreview}
-          alt="Uploaded storyboard"
-        />
-      )}
-      <div className={styles.assetEmpty}>
-        <span className={styles.eyebrow}>에셋보드</span>
-        <h2>에셋보드는 곧 추가됩니다</h2>
-        <p>이 탭의 디자인은 추후 정의됩니다.</p>
-      </div>
-    </section>
   );
 }
