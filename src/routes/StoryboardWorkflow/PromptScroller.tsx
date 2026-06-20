@@ -30,6 +30,43 @@ export function PromptScroller({
   const containerRef = useRef<HTMLDivElement>(null);
   const rowRefs = useRef<Array<HTMLDivElement | null>>([]);
 
+  // Intro animation: on first mount, start scrolled to the bottom row and
+  // glide up to the top row. Scroll-snap is suspended during the glide.
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const DURATION = 1500;
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3); // easeOutCubic
+    let raf = 0;
+    let start = 0;
+    let max = 0;
+
+    el.style.scrollSnapType = 'none';
+    el.scrollTop = el.scrollHeight - el.clientHeight; // jump to bottom
+
+    const step = (ts: number) => {
+      if (!start) {
+        start = ts;
+        max = el.scrollTop;
+      }
+      const p = Math.min((ts - start) / DURATION, 1);
+      el.scrollTop = max * (1 - ease(p));
+      if (p < 1) {
+        raf = requestAnimationFrame(step);
+      } else {
+        el.style.scrollSnapType = '';
+      }
+    };
+    raf = requestAnimationFrame(step);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      el.style.scrollSnapType = '';
+    };
+  }, []);
+
   // Track which row is closest to the scroller's vertical center.
   useEffect(() => {
     const container = containerRef.current;
