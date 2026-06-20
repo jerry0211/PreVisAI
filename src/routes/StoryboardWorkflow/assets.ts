@@ -50,76 +50,76 @@ export function buildPlaceholderAssets(): Asset[] {
       id: 'char_ki_taek',
       name: '기택',
       category: 'character',
-      image: null,
+      image: '/outputs/Assets/기택.png',
       description:
-        '40대 후반 남성, 마른 체형에 짙은 다크서클. 헐렁한 반팔 홈웨어, 불안을 감춘 옅은 미소.',
+        '나무 의자에 앉아 컵을 든 중년 남성. 희끗한 짧은 머리, 회색 티셔츠, 옅은 미소. 낡은 벽지와 구형 TV가 있는 반지하 방.',
       prompt:
-        '[placeholder] cinematic portrait of a lean late-40s Korean man, tired eyes, gentle forced smile, loose short-sleeve homewear, dim semi-basement light, cold flat tone, film still',
+        'cinematic film still of a middle-aged Korean man with short greying hair and a gentle tired smile, gray t-shirt, sitting on a wooden chair holding a mug, worn semi-basement room with an old CRT TV and soju bottles on a small table, dim overcast light, cold muted tone',
     },
     {
       id: 'char_chung_sook',
       name: '충숙',
       category: 'character',
-      image: null,
+      image: '/outputs/Assets/충숙.png',
       description:
-        '40대 여성, 단단한 체격과 직설적인 태도. 집안일 도중의 편안한 차림.',
+        '같은 반지하 방에 앉은 40대 여성. 검은 단발, 단단하고 담담한 표정, 회색 티셔츠, 두 손에 컵.',
       prompt:
-        '[placeholder] cinematic portrait of a sturdy 40s Korean woman, blunt expression, casual housework clothes, semi-basement interior, overcast cold light, film still',
+        'cinematic film still of a 40s Korean woman with a black bob and calm firm expression, gray t-shirt, seated holding a mug in a worn semi-basement room, dim natural light, cold desaturated tone',
     },
     {
       id: 'char_ki_woo',
       name: '기우',
       category: 'character',
-      image: null,
-      description: '20대 초반 아들, 조심스럽고 관찰력이 강한 인상.',
+      image: '/outputs/Assets/기우.png',
+      description: '흰 티셔츠의 20대 청년. 짧은 검은 머리, 옆을 응시하는 차분한 눈빛, 의자에 앉아 컵을 든 모습.',
       prompt:
-        '[placeholder] cinematic portrait of an early-20s Korean man, observant careful look, simple t-shirt, dim apartment, naturalistic cold tone, film still',
+        'cinematic film still of an early-20s Korean man with short black hair, white t-shirt, glancing to the side with a calm look, seated holding a mug in a dim semi-basement room, cold naturalistic tone',
     },
     {
       id: 'char_ki_jung',
       name: '기정',
       category: 'character',
-      image: null,
-      description: '20대 딸, 침착하고 영리한 표정. 무심한 듯한 태도.',
+      image: '/outputs/Assets/기정.png',
+      description: '긴 검은 머리의 20대 여성. 어두운 티셔츠, 차분하고 영민한 인상, 같은 반지하 방의 의자.',
       prompt:
-        '[placeholder] cinematic portrait of a 20s Korean woman, calm clever expression, casual outfit, semi-basement light, cold desaturated tone, film still',
+        'cinematic film still of a 20s Korean woman with long black hair, dark t-shirt, calm clever gaze, seated holding a mug in the same semi-basement room, cold desaturated tone',
     },
     {
       id: 'loc_semi_basement',
       name: '반지하 거실·부엌',
       category: 'location',
-      image: null,
+      image: '/outputs/Assets/반지하.jpg',
       description:
-        '서울 반지하 주택의 거실 겸 부엌. 낮은 천장과 지면 높이의 창문, 바닥을 덮은 피자 박스.',
+        '서울 반지하 집의 거실 겸 부엌. 지면 높이 창으로 행인의 발목이 지나가고, 곳곳에 미접 피자 박스가 쌓임. 우측 싱크대와 낡은 라디에이터, 차갑고 흐린 톤.',
       prompt:
-        '[placeholder] wide interior of a cramped Seoul semi-basement apartment, low ceiling, ground-level windows showing ankles of passersby, stacks of pizza boxes on the floor, overcast cold daylight',
+        'wide interior film still of a cramped Seoul semi-basement living room and kitchen, low concrete ceiling, ground-level windows showing the legs of passersby, stacks of flat pizza boxes across the floor, kitchen sink and counter on the right, old radiator, overcast cold daylight, muted palette',
     },
     {
       id: 'obj_pizza_boxes',
       name: '피자 박스 더미',
       category: 'object',
-      image: null,
-      description: '바닥 전체에 산처럼 쌓인 미접 피자 박스 원판.',
+      image: '/outputs/Assets/피자박스.jpg',
+      description: '콘크리트 바닥과 팔레트 위에 쌓인 미접 피자 박스 원판 더미. 골판지 질감이 드러나는 클로즈업.',
       prompt:
-        '[placeholder] a mountain of unfolded flat pizza box blanks piled across a floor, worn cardboard texture, dim interior light',
+        'close-up film still of stacks of unfolded flat pizza box blanks piled on a concrete floor and a wooden pallet, corrugated cardboard texture, dim cool industrial light',
     },
     {
       id: 'obj_fumigation_fog',
       name: '소독 연막',
       category: 'object',
-      image: null,
-      description: '창문으로 흘러드는 흰 소독 연기. 실내 전체의 대비를 낮춤.',
+      image: '/outputs/Assets/소독 연막.jpg',
+      description: '창으로 흘러든 흰 소독 연막이 실내를 가득 메운 장면. 대비가 낮아지고 가구 윤곽이 뿌옇게 흐려짐.',
       prompt:
-        '[placeholder] white fumigation fog drifting through a dim apartment interior, volumetric haze, low contrast, scattered light',
+        'film still of a dim semi-basement interior flooded with white fumigation fog drifting in through the windows, heavy volumetric haze, very low contrast, desaturated cold tone, furniture silhouettes barely visible',
     },
     {
       id: 'style_look',
       name: '룩 & 톤',
       category: 'style',
-      image: null,
-      description: '차갑고 채도가 낮은 반지하 톤. 자연광 기반, 2.39:1 시네마틱 룩.',
+      image: '/outputs/Assets/컬라 톤.png',
+      description: '씬 전체 컬러 팔레트. 음영(Shadow)과 하이라이트(Muted Highlights) 스와치 — 차분한 브라운·슬레이트 블루그레이·머디 그린, 낮은 채도.',
       prompt:
-        '[placeholder] color grade: cold desaturated palette, low contrast, naturalistic semi-basement lighting, 2.39:1 aspect, subtle film grain',
+        'scene color palette reference board: muted browns, slate blue-grays and muddy greens arranged as shadow and muted-highlight swatches, low saturation, cold cinematic grade',
     },
   ];
 }

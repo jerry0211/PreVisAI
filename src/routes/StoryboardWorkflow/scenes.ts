@@ -46,17 +46,32 @@ const SHOTS = [
 ];
 
 /**
- * Build placeholder panels. Swap this out for real generated panels later;
- * the component only relies on the `ScenePanel` shape.
+ * Storyboard panel images, in order, from public/outputs/Storyboard Splits.
+ * Paths are raw; consumers wrap them with encodeURI() for spaces/Hangul.
  */
-export function buildPlaceholderPanels(count = SHOTS.length): ScenePanel[] {
+const STORYBOARD_IMAGES = [
+  '/outputs/Storyboard Splits/스토리보드1.jpg',
+  '/outputs/Storyboard Splits/스토리보드2.jpg',
+  '/outputs/Storyboard Splits/스토리보드3.jpg',
+  '/outputs/Storyboard Splits/스토리보드4.jpg',
+  '/outputs/Storyboard Splits/스토리보드5.jpg',
+];
+
+/**
+ * Build panels from the uploaded storyboard splits (one per image, in order).
+ * The combined prompt+vectors JSON is still placeholder until real output
+ * exists; only the `data` field needs swapping later.
+ */
+export function buildPlaceholderPanels(
+  count = STORYBOARD_IMAGES.length,
+): ScenePanel[] {
   return Array.from({ length: count }, (_, i) => {
     const panel = i + 1;
     const shot = SHOTS[i % SHOTS.length];
     return {
       id: `panel_${String(panel).padStart(2, '0')}`,
       label: `Panel ${String(panel).padStart(2, '0')} · ${shot}`,
-      image: null,
+      image: STORYBOARD_IMAGES[i] ?? null,
       data: {
         scene: 'scene_03',
         panel,

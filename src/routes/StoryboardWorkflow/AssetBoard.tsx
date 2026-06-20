@@ -57,7 +57,7 @@ function AssetCard({ asset }: { asset: Asset }) {
         {asset.image ? (
           <img
             className={styles.thumbImg}
-            src={asset.image}
+            src={encodeURI(asset.image)}
             alt={asset.name}
           />
         ) : (

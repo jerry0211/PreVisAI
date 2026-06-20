@@ -83,11 +83,7 @@ export function PromptScroller({
             aria-current={i === active ? 'true' : undefined}
           >
             <article className={styles.card}>
-              <PanelCrop
-                panel={panel}
-                index={i}
-                storyboardPreview={storyboardPreview}
-              />
+              <PanelCrop panel={panel} storyboardPreview={storyboardPreview} />
               <div className={styles.body}>
                 <div className={styles.bodyHead}>
                   <span className={styles.label}>{panel.label}</span>
@@ -111,50 +107,23 @@ export function PromptScroller({
   );
 }
 
-/** Left-side storyboard crop. Real crop if provided, else a slice of the full
- *  storyboard image, else a labeled placeholder. */
+/** Storyboard image shown in full on top of the card. Falls back to the
+ *  uploaded storyboard, then a labeled placeholder. */
 function PanelCrop({
   panel,
-  index,
   storyboardPreview,
 }: {
   panel: ScenePanel;
-  index: number;
   storyboardPreview: string | null;
 }) {
-  if (panel.image) {
-    return (
-      <div
-        className={styles.crop}
-        style={{ backgroundImage: `url(${panel.image})` }}
-        role="img"
-        aria-label={panel.label}
-      />
-    );
-  }
-
-  if (storyboardPreview) {
-    // Fake a per-panel crop by sampling a region of the full storyboard.
-    const cols = 3;
-    const x = ((index % cols) / (cols - 1)) * 100;
-    const y = (Math.floor(index / cols) % 2) * 100;
-    return (
-      <div
-        className={styles.crop}
-        style={{
-          backgroundImage: `url(${storyboardPreview})`,
-          backgroundSize: '260% auto',
-          backgroundPosition: `${x}% ${y}%`,
-        }}
-        role="img"
-        aria-label={panel.label}
-      />
-    );
+  const src = panel.image ?? storyboardPreview;
+  if (src) {
+    return <img className={styles.cropImg} src={encodeURI(src)} alt={panel.label} />;
   }
 
   return (
-    <div className={`${styles.crop} ${styles.cropPlaceholder}`}>
-      <span>스토리보드 크롭</span>
+    <div className={styles.cropPlaceholder}>
+      <span>스토리보드</span>
     </div>
   );
 }
