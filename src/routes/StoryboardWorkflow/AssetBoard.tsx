@@ -46,7 +46,7 @@ export function AssetBoard() {
   );
 }
 
-function AssetCard({ asset }: { asset: Asset }) {
+export function AssetCard({ asset }: { asset: Asset }) {
   const copyPrompt = () => {
     void navigator.clipboard?.writeText(asset.prompt);
   };

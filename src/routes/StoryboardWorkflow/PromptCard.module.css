@@ -1,0 +1,94 @@
+/* One prompt panel card — storyboard crop floats over the combined JSON.
+   Self-contained (used by PromptScroller and by motion scenes). The crop height
+   is a variable so callers can size it: PromptScroller leaves the 16vh default;
+   compact contexts (a scene feed) override `--prompt-crop-h`. */
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--color-bg-soft);
+  /* visible so the storyboard tile can float above the card edge */
+  overflow: visible;
+  transform-origin: center;
+}
+
+/* storyboard image — flat floating tile, bottom-right */
+.cropImg {
+  position: absolute;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  height: var(--prompt-crop-h, 16vh);
+  width: auto;
+  max-width: calc(100% - 2 * var(--space-5));
+  display: block;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  z-index: 3;
+}
+
+.cropPlaceholder {
+  position: absolute;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  display: grid;
+  place-items: center;
+  width: 50%;
+  min-height: var(--prompt-crop-h, 10vh);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-inset);
+  color: var(--text-faint);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-wide);
+  z-index: 3;
+}
+
+/* bottom: combined JSON */
+.body {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.bodyHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.label {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  font-family: var(--font-mono);
+  color: var(--text);
+}
+
+.json {
+  margin: 0;
+  overflow: auto;
+  padding: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  white-space: pre;
+  scrollbar-width: none;
+}
+
+.json::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .cropImg {
+    max-height: 22vh;
+  }
+}

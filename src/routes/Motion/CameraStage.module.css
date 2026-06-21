@@ -10,7 +10,7 @@
   box-shadow: var(--shadow-pop);
 }
 
-/* Logical 1280×720 frame, scaled by JS to fill .frame. */
+/* Logical 16:9 frame (the iframe's viewport), scaled by JS to fill .frame. */
 .fit {
   position: absolute;
   top: 0;
@@ -18,21 +18,36 @@
   transform-origin: top left;
 }
 
-/* The filmed world (the iframe), moved/zoomed by the camera transform. */
-.world {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: top left;
-  will-change: transform;
+/* The filmed page. The camera move is a transform on this iframe's *document*
+   (set in JS), not on the element — so the page re-rasterises at the zoom scale
+   and tight crops stay sharp. */
+.iframe {
+  display: block;
+  border: 0;
+  background: var(--color-bg);
+  pointer-events: none; /* non-interactive film */
 }
 
-.iframe {
-  border: 0;
-  display: block;
-  background: var(--color-bg);
-  /* Belt-and-suspenders: the world is non-interactive film. */
+/* Animated click cursor, in the logical frame's coordinate space. */
+.cursorLayer {
+  position: absolute;
+  inset: 0;
   pointer-events: none;
+  z-index: 2;
+}
+
+.cursor {
+  position: absolute;
+  transform-origin: top left;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.55));
+}
+
+.ripple {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--accent);
+  background: rgb(var(--hue-accent) / 0.18);
 }
 
 /* Cinematic edge darkening so the cropped frame reads as a lens, not a crop. */

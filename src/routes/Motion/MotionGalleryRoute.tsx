@@ -52,7 +52,9 @@ export function MotionGalleryRoute() {
                   <span className={styles.duration}>
                     {formatTime(pieceDuration(piece))}
                   </span>
-                  <span className={styles.filming}>films {piece.src}</span>
+                  <span className={styles.filming}>
+                    {piece.scenes.length}개 씬
+                  </span>
                 </div>
                 <h2 className={styles.cardTitle}>{piece.title}</h2>
                 <p className={styles.cardTag}>{piece.tagline}</p>

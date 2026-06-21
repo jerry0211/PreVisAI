@@ -1,0 +1,32 @@
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-strong);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-pop);
+}
+
+/* logical 1280×720 frame, scaled by JS to fill .frame */
+.fit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top left;
+}
+
+.iframe {
+  display: block;
+  border: 0;
+  background: var(--color-bg);
+  pointer-events: none;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 120px 24px rgba(0, 0, 0, 0.5);
+}

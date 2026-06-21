@@ -1,0 +1,154 @@
+/* 16:9 cinematic frame (same look as the filmed CameraStage). */
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-strong);
+  background: var(--color-bg);
+  box-shadow: var(--shadow-pop);
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-8);
+}
+
+/* --- left: storyboard ----------------------------------------------------- */
+.boardCol {
+  flex: 1 1 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.board {
+  position: relative;
+  height: 100%;
+}
+
+.boardImg {
+  display: block;
+  height: 100%;
+  width: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+}
+
+.box {
+  position: absolute;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.35),
+    0 0 18px rgb(var(--hue-accent) / 0.45);
+  transform-origin: center;
+}
+
+.boxTag {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  transform: translateY(-100%);
+  padding: 2px 6px;
+  border-radius: 4px 4px 4px 0;
+  background: var(--accent);
+  color: var(--accent-contrast);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+  line-height: 1.3;
+}
+
+/* --- right: prompt-JSON feed (bottom-anchored) ----------------------------
+   Width matches AssetExtractScene's feed so the storyboard sits at the exact
+   same position across the scene 2 → 3 cut (no jump). */
+.feedCol {
+  flex: 0 0 380px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.feedHead {
+  flex: none;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.feed {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  min-height: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 14%,
+    #000 100%
+  );
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 100%);
+}
+
+/* Slot in the feed: drives the rise-in / scroll animation and clips the
+   scaled-down card to its displayed size (width/height set inline). */
+.cardSlot {
+  flex: none;
+  align-self: center;
+  overflow: hidden;
+}
+
+/* The card at REAL logical size; scaled down via inline transform. Width/height
+   and the crop-tile height (--prompt-crop-h) are set inline from promptLayout. */
+.cardLogical {
+  transform-origin: top left;
+}
+
+/* --- caption + vignette --------------------------------------------------- */
+.caption {
+  position: absolute;
+  left: var(--space-8);
+  bottom: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.captionText {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-lg);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.7);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 120px 24px rgba(0, 0, 0, 0.5);
+}

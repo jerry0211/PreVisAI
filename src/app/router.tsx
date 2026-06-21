@@ -7,6 +7,7 @@ import { StoryboardWorkflowRoute } from '@/routes/StoryboardWorkflow/StoryboardW
 import { MainShowcaseRoute } from '@/routes/MainShowcase/MainShowcaseRoute';
 import { MotionGalleryRoute } from '@/routes/Motion/MotionGalleryRoute';
 import { MotionPlayerRoute } from '@/routes/Motion/MotionPlayerRoute';
+import { PromptFilmRoute } from '@/routes/Motion/film/PromptFilmRoute';
 import { NotFoundRoute } from '@/routes/NotFound/NotFoundRoute';
 
 /**
@@ -25,5 +26,6 @@ export const router = createBrowserRouter([
   { path: '/main', element: <MainShowcaseRoute /> },
   { path: '/motion', element: <MotionGalleryRoute /> },
   { path: '/motion/:pieceId', element: <MotionPlayerRoute /> },
+  { path: '/film/prompts', element: <PromptFilmRoute /> },
   { path: '*', element: <NotFoundRoute /> },
 ]);

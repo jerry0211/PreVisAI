@@ -40,8 +40,11 @@ export function useStoryboardWorkflow() {
   const [highlight, setHighlight] = useState<Highlight | null>(null);
   const [searching, setSearching] = useState(false);
 
+  // Normally set only by uploading a file. The Motion tab can pre-populate it
+  // with a static image URL via the `demoStoryboard` session seed so the
+  // workflow can be filmed in an "already uploaded" state.
   const [storyboardPreview, setStoryboardPreview] = useState<string | null>(
-    null,
+    () => sessionStorage.getItem('demoStoryboard'),
   );
   const [status, setStatus] = useState<Status>({
     text: '스토리보드 업로드 준비 완료',

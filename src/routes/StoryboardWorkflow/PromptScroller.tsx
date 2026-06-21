@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { Pill } from '@/components/Pill/Pill';
-import { downloadFile } from '@/lib/download';
 import type { ScenePanel } from './scenes';
+import { PromptCard } from './PromptCard';
 import styles from './PromptScroller.module.css';
 
 interface PromptScrollerProps {
@@ -107,60 +106,24 @@ export function PromptScroller({
   }, [panels.length, onActiveChange]);
 
   return (
-    <div className={styles.scroller} ref={containerRef}>
-      {panels.map((panel, i) => {
-        const json = JSON.stringify(panel.data, null, 2);
-        return (
-          <div
-            key={panel.id}
-            ref={(el) => (rowRefs.current[i] = el)}
-            className={[styles.row, i === active ? styles.rowActive : '']
-              .filter(Boolean)
-              .join(' ')}
-            aria-current={i === active ? 'true' : undefined}
-          >
-            <article className={styles.card}>
-              <PanelCrop panel={panel} storyboardPreview={storyboardPreview} />
-              <div className={styles.body}>
-                <div className={styles.bodyHead}>
-                  <span className={styles.label}>{panel.label}</span>
-                  <Pill
-                    size="small"
-                    type="button"
-                    onClick={() =>
-                      downloadFile(`${panel.id}.json`, json, 'application/json')
-                    }
-                  >
-                    JSON
-                  </Pill>
-                </div>
-                <pre className={styles.json}>{json}</pre>
-              </div>
-            </article>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
+    <div className={styles.scroller} ref={containerRef} data-prompt-scroller>
 
-/** Storyboard image shown in full on top of the card. Falls back to the
- *  uploaded storyboard, then a labeled placeholder. */
-function PanelCrop({
-  panel,
-  storyboardPreview,
-}: {
-  panel: ScenePanel;
-  storyboardPreview: string | null;
-}) {
-  const src = panel.image ?? storyboardPreview;
-  if (src) {
-    return <img className={styles.cropImg} src={encodeURI(src)} alt={panel.label} />;
-  }
-
-  return (
-    <div className={styles.cropPlaceholder}>
-      <span>스토리보드</span>
+      {panels.map((panel, i) => (
+        <div
+          key={panel.id}
+          ref={(el) => (rowRefs.current[i] = el)}
+          className={[styles.row, i === active ? styles.rowActive : '']
+            .filter(Boolean)
+            .join(' ')}
+          aria-current={i === active ? 'true' : undefined}
+        >
+          <PromptCard
+            panel={panel}
+            storyboardPreview={storyboardPreview}
+            className={i === active ? styles.cardActive : styles.cardFaded}
+          />
+        </div>
+      ))}
     </div>
   );
 }

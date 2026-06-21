@@ -1,0 +1,20 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.cursor {
+  position: absolute;
+  transform-origin: top left;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.55));
+}
+
+.ripple {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--accent);
+  background: rgb(var(--hue-accent) / 0.18);
+}

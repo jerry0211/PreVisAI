@@ -4,7 +4,7 @@ import { AppShell } from '@/components/AppShell/AppShell';
 import { TopBar } from '@/components/TopBar/TopBar';
 import { BrandMini } from '@/components/Brand/BrandMini';
 import { Pill } from '@/components/Pill/Pill';
-import { CameraStage } from './CameraStage';
+import { SceneSequence } from './SceneSequence';
 import { findPiece, pieceDuration } from './pieces';
 import { useMotionClock } from './useMotionClock';
 import { formatTime } from './timeline';
@@ -48,20 +48,12 @@ function Player() {
           </Pill>
           <span className={styles.title}>{piece.title}</span>
         </nav>
-        <Pill variant="ghost" size="small" to={piece.src}>
-          실제 화면 열기
-        </Pill>
+        <span className={styles.sceneCount}>{piece.scenes.length}개 씬</span>
       </TopBar>
 
       <main className={styles.page}>
         <div ref={stageRef} className={styles.stageWrap}>
-          <CameraStage
-            src={piece.src}
-            worldWidth={piece.worldWidth}
-            shots={piece.shots}
-            seed={piece.seed}
-            t={clock.t}
-          />
+          <SceneSequence scenes={piece.scenes} t={clock.t} />
         </div>
 
         <div className={styles.controls}>
@@ -112,12 +104,12 @@ function Player() {
           <h1 className={styles.aboutTitle}>{piece.title}</h1>
           <p className={styles.aboutText}>{piece.description}</p>
           <ul className={styles.shotList}>
-            {piece.shots.map((s, i) => (
-              <li key={i}>
+            {piece.scenes.map((s, i) => (
+              <li key={s.id}>
                 <span className={styles.shotNum}>
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                {s.caption ?? s.kicker ?? '—'}
+                {s.title}
               </li>
             ))}
           </ul>

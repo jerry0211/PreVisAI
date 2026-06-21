@@ -1,0 +1,19 @@
+/* The active scene renders its own 16:9 frame; scenes cut seamlessly (no fade).
+   `.preload` scenes stay mounted but hidden so their iframes never reload. */
+.seq {
+  position: relative;
+  width: 100%;
+}
+
+.layer {
+  width: 100%;
+}
+
+/* mounted-but-hidden (preloaded) — kept on-screen (not display:none) so the
+   iframe actually loads, but invisible and non-interactive */
+.preload {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}

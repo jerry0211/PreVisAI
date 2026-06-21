@@ -33,18 +33,12 @@
   z-index: 5;
 }
 
-.card {
-  width: 100%;
-  /* Storyboard floats on top, JSON prompt flows below — one continuous card. */
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  background: var(--color-bg-soft);
-  /* visible so the storyboard tile can float above the card edge */
-  overflow: visible;
+/* The card itself lives in PromptCard.module.css; the scroller only supplies
+   the row depth/focus transforms, passed to PromptCard via className. */
+
+/* Default (non-current) rows: smaller, faded, pushed back. */
+.cardFaded {
   transform-origin: center;
-  /* Default (non-current) rows: smaller, faded, pushed back. */
   transform: translateZ(-90px) scale(0.9);
   opacity: 0.3;
   z-index: 1;
@@ -57,83 +51,14 @@
 }
 
 /* Current row pops slightly forward — flat, no blurred/gradient shadow. */
-.rowActive .card {
+.cardActive {
+  transform-origin: center;
   transform: translateZ(60px) translateY(-1vh) scale(1.01);
   opacity: 1;
   border-color: var(--accent-line);
-}
-
-/* ---------- storyboard image — half-size flat floating tile ----------
-   Floats above the card (out of flow) so the JSON fills the entire block.
-   Solid border only — no blurred/gradient shadow. */
-.cropImg {
-  position: absolute;
-  right: var(--space-5);
-  bottom: var(--space-5);
-  /* box hugs the image (height-driven, aspect-preserved) — no letterbox */
-  height: 16vh;
-  width: auto;
-  max-width: calc(100% - 2 * var(--space-5));
-  display: block;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  z-index: 3;
-}
-
-.cropPlaceholder {
-  position: absolute;
-  right: var(--space-5);
-  bottom: var(--space-5);
-  display: grid;
-  place-items: center;
-  width: 50%;
-  min-height: 10vh;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  background: var(--surface-inset);
-  color: var(--text-faint);
-  font-size: var(--fs-xs);
-  letter-spacing: var(--tracking-wide);
-  z-index: 3;
-}
-
-/* ---------- bottom: combined JSON ---------- */
-.body {
-  flex: 1;
-  min-height: 0;
-  display: grid;
-  grid-template-rows: auto 1fr;
-}
-
-.bodyHead {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: var(--space-4) var(--space-5);
-  border-bottom: 1px solid var(--border);
-}
-
-.label {
-  font-size: var(--fs-sm);
-  font-weight: var(--fw-semibold);
-  font-family: var(--font-mono);
-  color: var(--text);
-}
-
-.json {
-  margin: 0;
-  overflow: auto;
-  padding: var(--space-5);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--text-muted);
-  white-space: pre;
-}
-
-@media (max-width: 720px) {
-  .cropImg {
-    max-height: 22vh;
-  }
+  transition:
+    transform 0.45s var(--ease-standard),
+    opacity 0.45s var(--ease-standard),
+    border-color 0.45s ease;
+  will-change: transform, opacity;
 }
